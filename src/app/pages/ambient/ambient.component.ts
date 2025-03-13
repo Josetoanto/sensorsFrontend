@@ -27,7 +27,15 @@ export class AmbientComponent implements OnInit {
     esto debe actualizar los datos "temperatura" y "humedad" asi como rellenar la dataQueua, con un maximo de largo de cola de 10 segundos
   }*/
 
-    navigateTo(route: string) {
-      this.router.navigate([route]);
+    navigateToHome() {
+      this.router.navigate(['/home']);
+    }
+    
+    navigateToSensors() {
+      this.router.navigate(['/home']);
+    }
+  
+    navigateToSettings() {
+      this.router.navigate(['/home']);
     }
 }

@@ -2,9 +2,9 @@
     <div class="sidebar">
         <h2>📊 Dashboard</h2>
         <nav>
-            <a (click)="navigateTo('/home')" >🏠 Home</a>
-            <a (click)="navigateTo('/temperaturaHumedad')">🌡️ Temperatura y Humedad</a>
-            <a (click)="navigateTo('/settings')">⚙️ Configuración</a>
+            <a (click)="navigateToHome()">🏠 Home</a>
+            <a (click)="navigateToSensors()">🌡️ Temperatura y Humedad</a>
+            <a (click)="navigateToSettings()">⚙️ Configuración</a>
         </nav>
     </div>
     <div class="content">
@@ -13,7 +13,7 @@
             <div class="card">💧<br>Humedad: {{ humedad }} %</div>
         </div>
         <div class="table-container">
-            <h3>Últimos 20 valores recibidos</h3>
+            <h3>Últimos 10 valores recibidos</h3>
             <table>
                 <thead>
                     <tr>
