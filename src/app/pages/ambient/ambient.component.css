@@ -5,25 +5,54 @@
     background-color: #f4f4f4;
 }
 .sidebar {
-    width: 250px;
-    background-color: #2c3e50;
+    width: 230px;
+    background-color: #251a72;
     color: white;
     padding: 20px;
     height: 100vh;
+    transition: width 0.3s;
 }
-.sidebar h2 {
-    text-align: center;
+.sidebar-collapsed {
+    width: 65px;
 }
-nav a {
-    display: block;
+.toggle-button {
+    background: none;
+    border: none;
     color: white;
-    text-decoration: none;
-    padding: 15px;
+    font-size: 1.5em;
+    cursor: pointer;
+    margin-bottom: 20px;
+    margin-left: 15px;
+    transition: background-color 0.3s, color 0.3s;
+    padding: 20px 20px ; 
     border-radius: 5px;
     margin: 5px 0;
 }
+.toggle-button:hover {
+    background-color: #f4f4f4; /* Color de fondo blanco */
+    color: #251a72; /* Color de texto azul oscuro */
+}
+nav a {
+    position: relative;
+    display: flex;
+    align-items: center;
+    color: white;
+    text-decoration: none;
+    padding: 15px 20px;
+    border-radius: 5px;
+    margin: 5px 0;
+    transition: background-color 0.3s, color 0.3s;
+    
+}
+nav a ion-icon {
+    font-size: 1.5em;
+}
+nav a .link-text {
+    margin-left: 10px;
+}
 nav a:hover {
-    background-color: #34495e;
+    background-color: #f4f4f4; /* Color de fondo blanco */
+    color: #251a72; /* Color de texto azul oscuro */
 }
 .content {
     flex: 1;
@@ -31,27 +60,78 @@ nav a:hover {
 }
 .dashboard {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     margin-bottom: 20px;
 }
 .card {
     background: white;
     padding: 20px;
     text-align: center;
-    width: 150px;
+    width: 555px;
+    height: 80px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background-color 0.3s, color 0.3s;
+}
+.card-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+.card .card-text {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    
+    transition: color 0.3s;
+}
+.card .temperature,
+.card .humidity {
+    font-size: 1.5em;
+    color: #251a72; /* Azul */
+    transition: color 0.3s;
+}
+.card .description {
+    font-size: 0.9em;
+    color: #888; /* Gris claro */
+    transition: color 0.3s;
+}
+.card ion-icon {
+    font-size: 2em;
+    color: #251a72; /* Azul */
+    transition: color 0.3s;
+}
+.card:hover {
+    background-color: #251a72;
+    color: white; /* Cambiar el color del texto al blanco */
+}
+.card:hover .card-text .temperature,
+.card:hover .card-text .humidity,
+.card:hover .card-text .description,
+.card:hover ion-icon {
+    color: white; /* Cambiar el color del icono y del texto al blanco */
 }
 .table-container {
+    color: #251a72;
     background: white;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
+
+.table-container h3 {
+    font-size: 22px;
+
+}
 table {
+    font-size: 15px;
     width: 100%;
     border-collapse: collapse;
-    margin-top: 10px;
+    margin-top: 50px;
 }
 th, td {
     border: 1px solid #ddd;
@@ -59,8 +139,9 @@ th, td {
     text-align: center;
 }
 th {
-    background-color: #2c3e50;
-    color: white;
+    color: black;
+    border-color: transparent;
+    text-align: left; 
 }
 @media (max-width: 768px) {
     .dashboard {
