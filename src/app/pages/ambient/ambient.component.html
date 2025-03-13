@@ -1,0 +1,35 @@
+<div class="dashboard-container">
+    <div class="sidebar">
+        <h2>📊 Dashboard</h2>
+        <nav>
+            <a (click)="navigateTo('/home')" >🏠 Home</a>
+            <a (click)="navigateTo('/temperaturaHumedad')">🌡️ Temperatura y Humedad</a>
+            <a (click)="navigateTo('/settings')">⚙️ Configuración</a>
+        </nav>
+    </div>
+    <div class="content">
+        <div class="dashboard">
+            <div class="card">🌡️<br>Temp: {{ temperatura }} °C</div>
+            <div class="card">💧<br>Humedad: {{ humedad }} %</div>
+        </div>
+        <div class="table-container">
+            <h3>Últimos 20 valores recibidos</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Temperatura (°C)</th>
+                        <th>Humedad (%)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of any">
+                        <td>{{ data.id }}</td>
+                        <td>{{ data.temperatura }}</td>
+                        <td>{{ data.humedad }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
