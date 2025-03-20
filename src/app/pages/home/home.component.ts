@@ -22,23 +22,13 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     // Aquí podrías configurar llamadas iniciales a tus sensores o simulaciones
-    this.simularDatos(); // Para pruebas
   }
 
   toggleSidebar() {
     this.isCollapsed = !this.isCollapsed;
   }
 
-  // Simulación de datos para pruebas
-  simularDatos() {
-    setInterval(() => {
-      this.luzAmbiental = Math.floor(Math.random() * 1000); // Simula entre 0 y 1000 lx
-      this.ritmoCardiaco = Math.floor(Math.random() * (100 - 60 + 1)) + 60; // Entre 60 y 100 BPM
-      this.temperaturaCorporal = +(Math.random() * (38 - 36) + 36).toFixed(1); // Entre 36.0 y 38.0 °C
-      this.inclinacion = Math.floor(Math.random() * 360); // Entre 0 y 360 grados
-    }, 3000); // Actualiza cada 3 segundos
-  }
-
+  
   // Navegación a otras páginas
   navigateToHome() {
     this.router.navigate(['/home']);

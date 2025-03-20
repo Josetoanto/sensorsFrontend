@@ -116,3 +116,49 @@ nav a:hover {
     color: white;
 }
 
+
+
+@media (max-width: 768px) {
+    .dashboard-container {
+        display: flex;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        background-color: #f4f4f4;
+        transition: all 0.3s ease-in-out; /* Transiciones suaves */
+    }
+
+    .sidebar {
+        width: 230px;
+        color: white;
+        padding: 20px;
+        height: 100vh;
+        transition: all 0.3s ease-in-out;
+        overflow: hidden;
+    }
+    
+    /* Cuando el sidebar no está colapsado */
+    .sidebar:not(.sidebar-collapsed) {
+        width: 100vw; /* Ocupa toda la pantalla */
+        position: absolute; /* Para que se superponga */
+        z-index: 10; /* Aparece por encima de otros elementos */
+    }
+
+    .sidebar:is(.sidebar-collapsed) {
+        width: 9vw; /* Ocupa toda la pantalla */
+        z-index: 10; /* Aparece por encima de otros elementos */
+        overflow: hidden;
+        position: absolute;
+    }
+
+    .card {
+        margin-left: 70px;
+        max-width: 350px;
+    }
+
+    .table-container {
+        margin-left: 70px;
+        max-width: max-content;
+
+    }
+    
+}

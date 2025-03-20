@@ -95,24 +95,19 @@ nav a:hover {
     display: flex;
     flex-direction: column;
     text-align: left;
-    
-    transition: color 0.3s;
 }
 .card .temperature,
 .card .humidity {
     font-size: 1.5em;
     color: #251a72; /* Azul */
-    transition: color 0.3s;
 }
 .card .description {
     font-size: 0.9em;
     color: #888; /* Gris claro */
-    transition: color 0.3s;
 }
 .card ion-icon {
     font-size: 2em;
     color: #251a72; /* Azul */
-    transition: color 0.3s;
 }
 .card:hover {
     background-color: #251a72;
@@ -152,13 +147,48 @@ th {
     border-color: transparent;
     text-align: left; 
 }
+
 @media (max-width: 768px) {
-    .dashboard {
-        flex-direction: column;
-        align-items: center;
+    .dashboard-container {
+        display: flex;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        background-color: #f4f4f4;
+        transition: all 0.3s ease-in-out; /* Transiciones suaves */
     }
+
+    .sidebar {
+        width: 230px;
+        color: white;
+        padding: 20px;
+        height: 100vh;
+        transition: all 0.3s ease-in-out;
+        overflow: hidden;
+    }
+    
+    /* Cuando el sidebar no está colapsado */
+    .sidebar:not(.sidebar-collapsed) {
+        width: 100vw; /* Ocupa toda la pantalla */
+        position: absolute; /* Para que se superponga */
+        z-index: 10; /* Aparece por encima de otros elementos */
+    }
+
+    .sidebar:is(.sidebar-collapsed) {
+        width: 9vw; /* Ocupa toda la pantalla */
+        z-index: 10; /* Aparece por encima de otros elementos */
+        overflow: hidden;
+        position: absolute;
+    }
+
     .card {
-        width: 90%;
-        margin-bottom: 10px;
+        margin-left: 70px;
+        max-width: 350px;
     }
+
+    .table-container {
+        margin-left: 70px;
+        max-width: 350px;
+
+    }
+    
 }
