@@ -4,31 +4,27 @@ import { Router } from '@angular/router';
 import { NgClass } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
-
 @Component({
-  selector: 'app-ambient',
+  selector: 'app-heart-rate',
   imports: [NgFor, NgClass, CommonModule],
-  templateUrl: './ambient.component.html',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  styleUrl: './ambient.component.css'
-})
-export class AmbientComponent implements OnInit {
-  luzAmbiental: number = 0;
-  lightQueue: number[] = [];  // Cola para los últimos 10 valores
-  promedioLuz: number = 0;
-  isCollapsed = false;
 
+  templateUrl: './heart-rate.component.html',
+  styleUrl: './heart-rate.component.css'
+})
+export class HeartRateComponent implements OnInit {
+  heartRate: number = 0;
+  heartRateQueue: number[] = [];
+  averageHeartRate: number = 0;
+  isCollapsed = false;
 
   chartOptions: any = {
     chart: {
       type: "radialBar"
     },
     series: [],
-    labels: ["Promedio de Luz (lx)"]
+    labels: ["Promedio de Ritmo Cardíaco (bpm)"]
   };
-
-
-  
 
   constructor(private router: Router) {}
 
@@ -36,23 +32,23 @@ export class AmbientComponent implements OnInit {
     // Aquí se puede llamar a obtenerSensorData()
   }
 
-  actualizarCola(nuevoValor: number) {
-    if (this.lightQueue.length >= 10) {
-      this.lightQueue.shift(); // Elimina el valor más antiguo
+  updateQueue(newValue: number) {
+    if (this.heartRateQueue.length >= 10) {
+      this.heartRateQueue.shift();
     }
-    this.lightQueue.push(nuevoValor);
-    this.calcularPromedio();
+    this.heartRateQueue.push(newValue);
+    this.calculateAverage();
   }
 
-  calcularPromedio() {
-    if (this.lightQueue.length > 0) {
-      this.promedioLuz = this.lightQueue.reduce((a, b) => a + b, 0) / this.lightQueue.length;
-      this.actualizarGrafica();
+  calculateAverage() {
+    if (this.heartRateQueue.length > 0) {
+      this.averageHeartRate = this.heartRateQueue.reduce((a, b) => a + b, 0) / this.heartRateQueue.length;
+      this.updateChart();
     }
   }
 
-  actualizarGrafica() {
-    this.chartOptions.series = [this.promedioLuz]; // Actualiza la gráfica con el nuevo promedio
+  updateChart() {
+    this.chartOptions.series = [this.averageHeartRate];
   }
 
   navigateToHome() {
@@ -66,17 +62,18 @@ export class AmbientComponent implements OnInit {
   navigateToSettings() {
     this.router.navigate(['/settings']);
   }
+
   navigateToHeartRate() {
     this.router.navigate(['/heart-rate']);
-}
+  }
 
-navigateToTemperature() {
+  navigateToTemperature() {
     this.router.navigate(['/temperature']);
-}
+  }
 
-navigateToGyroscope() {
+  navigateToGyroscope() {
     this.router.navigate(['/gyroscope']);
-}
+  }
 
   toggleSidebar() {
     this.isCollapsed = !this.isCollapsed;

@@ -3,7 +3,7 @@
         <button class="toggle-button" (click)="toggleSidebar()"> 
             <ion-icon name="menu-outline"></ion-icon>
         </button>
-        <nav>
+        <nav> 
             <a (click)="navigateToHome()">
                 <ion-icon name="home-outline"></ion-icon>
                 <span class="link-text" *ngIf="!isCollapsed">Home</span>
@@ -33,42 +33,42 @@
 
     <div class="content">
         <div class="dashboard">
-            <div class="card light-card">
+            <div class="card heart-card">
                 <div class="card-content">
                     <div class="card-text">
-                        <div class="light">{{ luzAmbiental }} lx</div>
-                        <div class="description">Luz Ambiental</div>
-                    </div>
-                    <ion-icon name="sunny-outline"></ion-icon>
-                </div>
-            </div>
-            <div class="card heart-rate-card">
-                <div class="card-content">
-                    <div class="card-text">
-                        <div class="heart-rate">{{ ritmoCardiaco }} BPM</div>
+                        <div class="heart-rate">{{ heartRate }} bpm</div>
                         <div class="description">Ritmo Cardíaco</div>
                     </div>
                     <ion-icon name="heart-outline"></ion-icon>
                 </div>
             </div>
-            <div class="card temperature-card">
-                <div class="card-content">
-                    <div class="card-text">
-                        <div class="temperature">{{ temperaturaCorporal }} °C</div>
-                        <div class="description">Temperatura Corporal</div>
-                    </div>
-                    <ion-icon name="thermometer-outline"></ion-icon>
-                </div>
-            </div>
-            <div class="card gyroscope-card">
-                <div class="card-content">
-                    <div class="card-text">
-                        <div class="gyroscope">{{ inclinacion }}°</div>
-                        <div class="description">Giroscopio</div>
-                    </div>
-                    <ion-icon name="compass-outline"></ion-icon>
-                </div>
-            </div>
+        </div>
+
+        <div class="table-container">
+            <h3>Últimos 10 valores recibidos</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Ritmo Cardíaco (bpm)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let value of heartRateQueue; let i = index">
+                        <td>{{ i + 1 }}</td>
+                        <td>{{ value }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="chart-container">
+            <h3>Promedio de Ritmo Cardíaco</h3>
+            <apx-chart 
+                [series]="chartOptions.series"
+                [chart]="chartOptions.chart"
+                [labels]="chartOptions.labels">
+            </apx-chart>
         </div>
     </div>
 </div>
