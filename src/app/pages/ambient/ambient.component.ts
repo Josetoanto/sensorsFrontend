@@ -16,7 +16,7 @@ export class AmbientComponent implements OnInit {
   luzAmbiental: number = 0;
   lightQueue: number[] = [];  // Cola para los últimos 10 valores
   promedioLuz: number = 0;
-  isCollapsed = false;
+  isCollapsed = true;
 
 
   chartOptions: any = {
@@ -27,13 +27,19 @@ export class AmbientComponent implements OnInit {
     labels: ["Promedio de Luz (lx)"]
   };
 
-
-  
-
   constructor(private router: Router) {}
 
   ngOnInit(): void {
+    const storedIsCollapsed = localStorage.getItem('isCollapsed');
+    if (storedIsCollapsed) {
+      this.isCollapsed = JSON.parse(storedIsCollapsed);
+    }
     // Aquí se puede llamar a obtenerSensorData()
+  }
+
+  toggleSidebar() {
+    this.isCollapsed = !this.isCollapsed;
+    localStorage.setItem('isCollapsed', JSON.stringify(this.isCollapsed));
   }
 
   actualizarCola(nuevoValor: number) {
@@ -78,7 +84,5 @@ navigateToGyroscope() {
     this.router.navigate(['/gyroscope']);
 }
 
-  toggleSidebar() {
-    this.isCollapsed = !this.isCollapsed;
-  }
+
 }

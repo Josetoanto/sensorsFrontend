@@ -13,13 +13,22 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 export class GyroscopeComponent implements OnInit {
   inclination: number = 0; // Inclinación en grados
   inclinationHistory: number[] = [];
-  isCollapsed = false;
+  isCollapsed = true;
 
 
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-    // Aquí puedes agregar la lógica para recibir los datos en tiempo real
+    const storedIsCollapsed = localStorage.getItem('isCollapsed');
+    if (storedIsCollapsed) {
+      this.isCollapsed = JSON.parse(storedIsCollapsed);
+    }
+    // Aquí se puede llamar a obtenerSensorData()
+  }
+
+  toggleSidebar() {
+    this.isCollapsed = !this.isCollapsed;
+    localStorage.setItem('isCollapsed', JSON.stringify(this.isCollapsed));
   }
 
   updateInclination(newValue: number) {
@@ -34,7 +43,5 @@ export class GyroscopeComponent implements OnInit {
     this.router.navigate([route]);
   }
 
-  toggleSidebar() {
-    this.isCollapsed = !this.isCollapsed;
-  }
+  
 }

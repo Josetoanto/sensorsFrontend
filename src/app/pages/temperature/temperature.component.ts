@@ -13,13 +13,22 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 export class TemperatureComponent implements OnInit {
   temperature: number = 0; // Temperatura en °C
   temperatureHistory: number[] = [];
-  isCollapsed = false;
+  isCollapsed = true;
 
 
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-    // Aquí puedes agregar la lógica para recibir los datos en tiempo real
+    const storedIsCollapsed = localStorage.getItem('isCollapsed');
+    if (storedIsCollapsed) {
+      this.isCollapsed = JSON.parse(storedIsCollapsed);
+    }
+    // Aquí se puede llamar a obtenerSensorData()
+  }
+
+  toggleSidebar() {
+    this.isCollapsed = !this.isCollapsed;
+    localStorage.setItem('isCollapsed', JSON.stringify(this.isCollapsed));
   }
 
   updateTemperature(newValue: number) {
@@ -34,8 +43,6 @@ export class TemperatureComponent implements OnInit {
     this.router.navigate([route]);
   }
 
-  toggleSidebar() {
-    this.isCollapsed = !this.isCollapsed;
-  }
+  
   
 }

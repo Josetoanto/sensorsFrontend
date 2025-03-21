@@ -21,11 +21,16 @@ export class HomeComponent implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit(): void {
+    const storedIsCollapsed = localStorage.getItem('isCollapsed');
+    if (storedIsCollapsed) {
+      this.isCollapsed = JSON.parse(storedIsCollapsed);
+    }
     // Aquí podrías configurar llamadas iniciales a tus sensores o simulaciones
   }
 
   toggleSidebar() {
     this.isCollapsed = !this.isCollapsed;
+    localStorage.setItem('isCollapsed', JSON.stringify(this.isCollapsed));
   }
 
   

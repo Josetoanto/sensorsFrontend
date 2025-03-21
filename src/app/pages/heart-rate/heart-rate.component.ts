@@ -16,7 +16,7 @@ export class HeartRateComponent implements OnInit {
   heartRate: number = 0;
   heartRateQueue: number[] = [];
   averageHeartRate: number = 0;
-  isCollapsed = false;
+  isCollapsed = true;
 
   chartOptions: any = {
     chart: {
@@ -29,7 +29,16 @@ export class HeartRateComponent implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit(): void {
+    const storedIsCollapsed = localStorage.getItem('isCollapsed');
+    if (storedIsCollapsed) {
+      this.isCollapsed = JSON.parse(storedIsCollapsed);
+    }
     // Aquí se puede llamar a obtenerSensorData()
+  }
+
+  toggleSidebar() {
+    this.isCollapsed = !this.isCollapsed;
+    localStorage.setItem('isCollapsed', JSON.stringify(this.isCollapsed));
   }
 
   updateQueue(newValue: number) {
@@ -75,7 +84,4 @@ export class HeartRateComponent implements OnInit {
     this.router.navigate(['/gyroscope']);
   }
 
-  toggleSidebar() {
-    this.isCollapsed = !this.isCollapsed;
-  }
 }

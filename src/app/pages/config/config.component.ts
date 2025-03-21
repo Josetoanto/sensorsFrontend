@@ -10,10 +10,22 @@ import { Router } from '@angular/router';
   styleUrl: './config.component.css'
 })
 export class ConfigComponent {
-  isCollapsed = false;
+  isCollapsed = true;
 
   constructor(private router: Router) {}
 
+  ngOnInit(): void {
+    const storedIsCollapsed = localStorage.getItem('isCollapsed');
+    if (storedIsCollapsed) {
+      this.isCollapsed = JSON.parse(storedIsCollapsed);
+    }
+    // Aquí se puede llamar a obtenerSensorData()
+  }
+
+  toggleSidebar() {
+    this.isCollapsed = !this.isCollapsed;
+    localStorage.setItem('isCollapsed', JSON.stringify(this.isCollapsed));
+  }
 
   navigateToHome() {
     this.router.navigate(['/home']);
@@ -38,7 +50,4 @@ navigateToGyroscope() {
     this.router.navigate(['/gyroscope']);
 }
 
-  toggleSidebar() {
-    this.isCollapsed = !this.isCollapsed;
-  }
 }
