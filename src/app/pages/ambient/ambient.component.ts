@@ -7,8 +7,8 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 @Component({
   selector: 'app-ambient',
-  imports: [NgFor, NgClass, CommonModule],
   templateUrl: './ambient.component.html',
+  imports: [NgFor, NgClass, CommonModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   styleUrl: './ambient.component.css'
 })

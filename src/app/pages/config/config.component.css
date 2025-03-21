@@ -6,7 +6,7 @@
 }
 .sidebar {
     width: 230px;
-    background-color: #251a72;
+    background-color: gray;
     color: white;
     padding: 20px;
     height: 100vh;
@@ -54,98 +54,6 @@ nav a .link-text {
 nav a:hover {
     background-color: #f4f4f4; /* Color de fondo blanco */
     color: black; /* Color de texto azul oscuro */
-}
-.content {
-    flex: 1;
-    padding: 20px;
-}
-.dashboard {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-}
-.card {
-    background: white;
-    padding: 20px;
-    text-align: center;
-    width: 555px;
-    height: 80px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-.card-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-}
-
-.chart-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-
-.card .card-text {
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-}
-.card .temperature,
-.card .humidity {
-    font-size: 1.5em;
-    color: #251a72; /* Azul */
-}
-.card .description {
-    font-size: 0.9em;
-    color: #888; /* Gris claro */
-}
-.card ion-icon {
-    font-size: 2em;
-    color: #251a72; /* Azul */
-    transition: color 0.3s;
-}
-.card:hover {
-    background-color: #251a72;
-    color: white; /* Cambiar el color del texto al blanco */
-}
-.card:hover .card-text .temperature,
-.card:hover .card-text .humidity,
-.card:hover .card-text .description,
-.card:hover ion-icon {
-    color: white; /* Cambiar el color del icono y del texto al blanco */
-}
-.table-container {
-    color: #251a72;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-
-.table-container h3 {
-    font-size: 22px;
-
-}
-table {
-    font-size: 15px;
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 50px;
-}
-th, td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: center;
-}
-th {
-    color: black;
-    border-color: transparent;
-    text-align: left; 
 }
 
 @media (max-width: 768px) {

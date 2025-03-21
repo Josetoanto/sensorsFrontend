@@ -13,6 +13,8 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 export class GyroscopeComponent implements OnInit {
   inclination: number = 0; // Inclinación en grados
   inclinationHistory: number[] = [];
+  isCollapsed = false;
+
 
   constructor(private router: Router) {}
 
@@ -33,6 +35,6 @@ export class GyroscopeComponent implements OnInit {
   }
 
   toggleSidebar() {
-    document.querySelector('.sidebar')?.classList.toggle('sidebar-collapsed');
+    this.isCollapsed = !this.isCollapsed;
   }
 }

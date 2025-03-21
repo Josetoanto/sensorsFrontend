@@ -59,7 +59,7 @@ nav a .link-text {
 
 nav a:hover {
     background-color: #f4f4f4;
-    color: #2a9d8f;
+    color: black;
 }
 .content {
     flex: 1;
@@ -81,7 +81,7 @@ nav a:hover {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    transition: background-color 0.3s, color 0.3s;
+    transition: background-color 0.3s;
 }
 .card-content {
     display: flex;
@@ -111,6 +111,7 @@ nav a:hover {
 .card ion-icon {
     font-size: 2em;
     color: #2a9d8f; /* Verde */
+    transition: color 0.3s;
 }
 .card:hover {
     background: linear-gradient(45deg, #2a9d8f, #21867a); /* Degradado en hover */
@@ -157,6 +158,10 @@ th {
         transition: all 0.3s ease-in-out; /* Transiciones suaves */
     }
 
+    nav:not(.sidebar-collapsed) {
+        width: 450px;
+    }
+    
     .sidebar {
         width: 230px;
         background: linear-gradient(45deg, #2a9d8f, #21867a); /* Degradado */
@@ -182,12 +187,12 @@ th {
     }
 
     .card {
-        margin-left: 70px;
+        margin-left: 75px;
         max-width: 350px;
     }
 
     .table-container {
-        margin-left: 70px;
+        margin-left: 75px;
         max-width: max-content;
 
     }

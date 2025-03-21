@@ -59,15 +59,16 @@ nav a .link-text {
 }
 nav a:hover {
     background-color: #f4f4f4;
-    color: #0081a7;
+    color: black;
 }
 .content {
     flex: 1;
     padding: 20px;
 }
 .dashboard {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 42% 40%;
+    grid-template-rows: 50% ;
     gap: 20px;
     justify-content: center;
     margin-bottom: 20px;
@@ -77,23 +78,20 @@ nav a:hover {
     background: white;
     padding: 20px;
     text-align: center;
-    width: 250px;
-    height: 150px;
+    width: 450px;
+    height: 250px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    display: flex;
-    align-items: center;
     justify-content: space-between;
     flex-direction: column;
-    transition: background-color 0.3s, color 0.3s;
+    transition: background-color 0.3s;
 }
 
 .card-content {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     width: 100%;
-    flex-direction: column;
 }
 
 .card .description {
@@ -104,6 +102,7 @@ nav a:hover {
 .card ion-icon {
     font-size: 3em;
     color: #0081a7; /* Azul */
+    transition: color 0.3s;
 }
 
 .card:hover {
@@ -121,10 +120,15 @@ nav a:hover {
 @media (max-width: 768px) {
     .dashboard-container {
         display: flex;
+        flex-direction: column;
         font-family: Arial, sans-serif;
         margin: 0;
         background-color: #f4f4f4;
         transition: all 0.3s ease-in-out; /* Transiciones suaves */
+    }
+
+    nav:not(.sidebar-collapsed) {
+        width: 450px;
     }
 
     .sidebar {
@@ -150,9 +154,15 @@ nav a:hover {
         position: absolute;
     }
 
+    .dashboard{
+        display: flex;
+        flex-direction: column;
+    }
+
     .card {
-        margin-left: 70px;
+        margin-left: 80px;
         max-width: 350px;
+        height: 60px;
     }
 
     .table-container {

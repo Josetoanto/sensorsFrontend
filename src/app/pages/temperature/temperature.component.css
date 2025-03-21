@@ -56,7 +56,7 @@ nav a .link-text {
 }
 nav a:hover {
     background-color: #f4f4f4;
-    color: #ffa600;
+    color: black;
 }
 .content {
     flex: 1;
@@ -78,7 +78,6 @@ nav a:hover {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    transition: background-color 0.3s, color 0.3s;
 }
 .card-content {
     display: flex;
@@ -95,19 +94,16 @@ nav a:hover {
     display: flex;
     flex-direction: column;
     text-align: left;
-    transition: color 0.3s;
 }
 
 .card .temperature,
 .card .humidity {
     font-size: 1.5em;
     color: #ffa600; /* Naranja */
-    transition: color 0.3s;
 }
 .card .description {
     font-size: 0.9em;
     color: #888;
-    transition: color 0.3s;
 }
 .card ion-icon {
     font-size: 2em;
@@ -160,6 +156,10 @@ th {
         transition: all 0.3s ease-in-out; /* Transiciones suaves */
     }
 
+    nav:not(.sidebar-collapsed) {
+        width: 450px;
+    }
+
     .sidebar {
         width: 230px;
         color: white;
@@ -169,7 +169,6 @@ th {
         overflow: hidden;
     }
     
-    /* Cuando el sidebar no está colapsado */
     .sidebar:not(.sidebar-collapsed) {
         width: 100vw; /* Ocupa toda la pantalla */
         position: absolute; /* Para que se superponga */
@@ -184,12 +183,12 @@ th {
     }
 
     .card {
-        margin-left: 70px;
+        margin-left: 80px;
         max-width: 350px;
     }
 
     .table-container {
-        margin-left: 70px;
+        margin-left: 80px;
         max-width: max-content;
 
     }

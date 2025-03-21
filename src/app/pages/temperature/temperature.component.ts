@@ -13,6 +13,8 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 export class TemperatureComponent implements OnInit {
   temperature: number = 0; // Temperatura en °C
   temperatureHistory: number[] = [];
+  isCollapsed = false;
+
 
   constructor(private router: Router) {}
 
@@ -33,6 +35,7 @@ export class TemperatureComponent implements OnInit {
   }
 
   toggleSidebar() {
-    document.querySelector('.sidebar')?.classList.toggle('sidebar-collapsed');
+    this.isCollapsed = !this.isCollapsed;
   }
+  
 }

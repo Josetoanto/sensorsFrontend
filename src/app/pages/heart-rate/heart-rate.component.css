@@ -51,7 +51,7 @@ nav a .link-text {
 }
 nav a:hover {
     background-color: #f4f4f4;
-    color: #e63946;
+    color: black;
 }
 .content {
     flex: 1;
@@ -73,7 +73,6 @@ nav a:hover {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    transition: background-color 0.3s, color 0.3s;
 }
 .card-content {
     display: flex;
@@ -149,6 +148,9 @@ th {
         background-color: #f4f4f4;
         transition: all 0.3s ease-in-out; /* Transiciones suaves */
     }
+    nav:not(.sidebar-collapsed) {
+        width: 450px;
+    }
 
     .sidebar {
         width: 230px;
@@ -173,13 +175,15 @@ th {
         position: absolute;
     }
 
+    
+
     .card {
-        margin-left: 70px;
+        margin-left: 75px;
         max-width: 350px;
     }
 
     .table-container {
-        margin-left: 70px;
+        margin-left: 75px;
         max-width: 350px;
         
     }
