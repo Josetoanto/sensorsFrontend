@@ -7,9 +7,10 @@ import { HeartRateComponent } from './pages/heart-rate/heart-rate.component';
 import { TemperatureComponent } from './pages/temperature/temperature.component';
 import { GyroscopeComponent } from './pages/gyroscope/gyroscope.component';
 import { ConfigComponent } from './pages/config/config.component';
+import { LandingPageComponent } from './pages/landing-page/landing-page.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '', redirectTo: '/landing-page', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
@@ -18,4 +19,5 @@ export const routes: Routes = [
   { path: 'temperature', component: TemperatureComponent },
   { path: 'gyroscope', component: GyroscopeComponent },
   { path: 'settings', component: ConfigComponent },
+  { path: 'landing-page', component: LandingPageComponent }
 ];

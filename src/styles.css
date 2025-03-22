@@ -4,6 +4,5 @@ body {
  }
  
  html, body {
-    overflow: hidden; /* Evita el desplazamiento */
     background-color: #f4f4f4;
    }
