@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HeaderComponent } from '../header/header.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-landing-page',
@@ -8,6 +9,12 @@ import { HeaderComponent } from '../header/header.component';
   styleUrl: './landing-page.component.css'
 })
 export class LandingPageComponent {
+
+  constructor(private router: Router) {}
+
+  navigateTo(route: string) {
+    this.router.navigate([route]);
+  }
 
   scrollToFeatures(): void {
     const element = document.getElementById('features');
