@@ -1,9 +1,10 @@
+
+
 .form-container {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    height: 100vh;
     background: linear-gradient(135deg, #1576d9 0%, #0077ff 50%, #00d4ff 100%);
     padding: 20px;
 }
@@ -28,6 +29,12 @@ h2 {
     font-family: 'poppins', sans-serif;
 }
 
+legend{
+    color: white;
+    font-weight: lighter;
+    font-family: sans-serif;
+}
+
 fieldset {
     border: none;
     display: flex;
@@ -40,16 +47,19 @@ label {
     font-size: 1rem;
     font-weight: 800;
     margin-top: 5px;
+    font-weight: lighter;
+    font-family: sans-serif;
 }
 
 input {
+    text-indent: 5%;
     border: none;
     border-radius: 8px;
     height: 35px;
     padding: 8px;
     font-size: 1rem;
     outline: none;
-    width: 100%;
+    width: 95.6%;
     box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -74,6 +84,8 @@ button:hover {
 }
 
 a {
+    cursor: pointer;
+    font-family: sans-serif;
     color: white;
     text-align: center;
     font-size: 1rem;
@@ -114,3 +126,17 @@ legend {
     background: white;
     color: #0077ff;
 }
+
+
+@media (max-width: 768px) {
+    
+    .form-container{
+        overflow-y: hidden;
+        overflow-x: hidden;
+    }
+
+    button {
+      display: none;
+    }
+  }
+  

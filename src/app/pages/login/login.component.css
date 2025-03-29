@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@300;400;500&display=swap');
 
+
 .form-container {
     display: flex;
     align-items: center;
@@ -29,6 +30,12 @@ h2 {
     font-family: 'poppins', sans-serif;
 }
 
+legend{
+    color: white;
+    font-weight: lighter;
+    font-family: sans-serif;
+}
+
 fieldset {
     border: none;
     display: flex;
@@ -40,17 +47,20 @@ label {
     color: white;
     font-size: 1rem;
     font-weight: 800;
+    font-weight: lighter;
+    font-family: sans-serif;
     margin-top: 5px;
 }
 
 input {
+    text-indent: 5%;
     border: none;
     border-radius: 8px;
     height: 35px;
     padding: 8px;
     font-size: 1rem;
     outline: none;
-    width: 100%;
+    width: 95.6%;
     box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -75,6 +85,8 @@ button:hover {
 }
 
 a {
+    cursor: pointer;
+    font-family: sans-serif;
     color: white;
     text-align: center;
     font-size: 1rem;
@@ -115,3 +127,10 @@ legend {
     background: white;
     color: #0077ff;
 }
+
+@media (max-width: 768px) {
+    button {
+      display: none;
+    }
+  }
+  
