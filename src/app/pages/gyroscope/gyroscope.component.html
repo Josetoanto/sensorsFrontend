@@ -35,30 +35,37 @@
         <div class="dashboard">
             <div class="card gyroscope-card">
                 <div class="card-content">
-                    <div class="card-text">
-                        <div class="inclination-value">
-                            {{ inclination }}° 
-                        </div>
-                        <div class="description">Inclinación Corporal</div>
+
+                  <div class="card-text">
+                    <div class="inclination-value">
+                      {{ inclination }}° 
                     </div>
-                    <ion-icon name="compass-outline"></ion-icon>
+                    <div class="description">Inclinación Corporal</div>
+                  </div>
+                  <ion-icon name="compass-outline"></ion-icon>
                 </div>
-            </div>
+              </div>
         </div>
 
         <div class="table-container">
-            <h3>Últimos 10 valores de inclinación</h3>
+            <h3>Últimos 10 registros del giroscopio</h3>
             <table>
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Grados</th>
+                        <th>Giro X</th>
+                        <th>Giro Y</th>
+                        <th>Giro Z</th>
+                        <th>Inclinación</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let value of inclinationHistory; let i = index">
-                        <td>{{ i + 1 }}</td>
-                        <td>{{ value }}°</td>
+                    <tr *ngFor="let data of sensorDataHistory; trackBy: trackBySensorData">
+                        <td>{{ data.id }}</td>
+                        <td>{{ data.giroX }}°</td>
+                        <td>{{ data.giroY }}°</td>
+                        <td>{{ data.giroZ }}°</td>
+                        <td>{{ calculateInclination(data) }}°</td>
                     </tr>
                 </tbody>
             </table>

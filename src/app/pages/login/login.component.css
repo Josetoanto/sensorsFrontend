@@ -129,7 +129,7 @@ legend {
 }
 
 @media (max-width: 768px) {
-    button {
+    .back-button {
       display: none;
     }
   }

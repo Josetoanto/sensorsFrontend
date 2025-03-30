@@ -37,38 +37,40 @@
                 <div class="card-content">
                     <div class="card-text">
                         <div class="heart-rate">{{ heartRate }} bpm</div>
-                        <div class="description">Ritmo Cardíaco</div>
+                        <div class="description">Ritmo Cardíaco Actual</div>
                     </div>
                     <ion-icon name="heart-outline"></ion-icon>
                 </div>
             </div>
+
+            <div class="card average-card">
+                <div class="card-content">
+                    <div class="card-text">
+                        <div class="heart-rate">{{ averageHeartRate | number:'1.0-2' }} bpm</div>
+                        <div class="description">Promedio Histórico</div>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="table-container">
-            <h3>Últimos 10 valores recibidos</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Ritmo Cardíaco (bpm)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let value of heartRateQueue; let i = index">
-                        <td>{{ i + 1 }}</td>
-                        <td>{{ value }}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <div class="chart-container">
-            <h3>Promedio de Ritmo Cardíaco</h3>
-            <apx-chart 
-                [series]="chartOptions.series"
-                [chart]="chartOptions.chart"
-                [labels]="chartOptions.labels">
-            </apx-chart>
+        <div class="data-container">
+            <div class="table-container">
+                <h3>Últimos 10 valores recibidos</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Ritmo Cardíaco (bpm)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let reading of heartReadings">
+                            <td>{{ reading.id }}</td>
+                            <td>{{ reading.bpm }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

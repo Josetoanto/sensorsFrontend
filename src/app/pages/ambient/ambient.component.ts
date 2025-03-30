@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule, NgFor } from '@angular/common';
 import { Router } from '@angular/router';
 import { NgClass } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { timer, Subscription } from 'rxjs';
+import { LightService } from '../../services/light.service';
 
 
 @Component({
@@ -12,29 +14,90 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   styleUrl: './ambient.component.css'
 })
-export class AmbientComponent implements OnInit {
+export class AmbientComponent implements OnInit, OnDestroy {
   luzAmbiental: number = 0;
+  lightReadings: any[] = [];
   lightQueue: number[] = [];  // Cola para los últimos 10 valores
   promedioLuz: number = 0;
   isCollapsed = true;
+  private refreshSubscription!: Subscription;
 
+ 
 
-  chartOptions: any = {
-    chart: {
-      type: "radialBar"
-    },
-    series: [],
-    labels: ["Promedio de Luz (lx)"]
-  };
-
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private lightService: LightService
+  ) {}
 
   ngOnInit(): void {
+    this.checkAuth();
+    this.initData();
+    this.setupAutoRefresh();
+    
     const storedIsCollapsed = localStorage.getItem('isCollapsed');
     if (storedIsCollapsed) {
       this.isCollapsed = JSON.parse(storedIsCollapsed);
     }
-    // Aquí se puede llamar a obtenerSensorData()
+  }
+
+  
+
+   ngOnDestroy(): void {
+    if (this.refreshSubscription) {
+      this.refreshSubscription.unsubscribe();
+    }
+  }
+  private checkAuth(): void {
+    const token = sessionStorage.getItem('token');
+    if (!token) {
+      this.router.navigate(['/login']);
+    }
+  }
+
+  private initData(): void {
+    const userId = 1;
+    
+    // Obtener última lectura
+    this.getLatestIllumination(userId);
+    
+    // Obtener históricos
+    this.lightService.getAllIlluminations(userId).subscribe({
+      next: (data) => {
+        this.lightReadings = data.slice(-10).reverse();
+        this.lightQueue = data.slice(-10).map(item => item.luz);
+      },
+      error: (err) => console.error('Error getting all data:', err)
+    });
+
+    // Obtener promedio
+    this.lightService.getAverageIllumination(userId).subscribe({
+      next: (avg) => this.promedioLuz = avg,
+      error: (err) => console.error('Error getting average:', err)
+    });
+  }
+
+  private setupAutoRefresh(): void {
+    const userId = 1;
+    this.refreshSubscription = timer(0, 60000).subscribe(() => {
+      this.getLatestIllumination(userId);
+    });
+  }
+
+  private getLatestIllumination(userId: number): void {
+    this.lightService.getLatestIllumination(userId).subscribe({
+      next: (data) => {
+        this.luzAmbiental = data.luz;
+        this.updateQueue(data.luz);
+      },
+      error: (err) => console.error('Error getting latest:', err)
+    });
+  }
+
+  private updateQueue(newValue: number): void {
+    if (this.lightQueue.length >= 10) {
+      this.lightQueue.shift();
+    }
+    this.lightQueue.push(newValue);
   }
 
   toggleSidebar() {
@@ -53,13 +116,10 @@ export class AmbientComponent implements OnInit {
   calcularPromedio() {
     if (this.lightQueue.length > 0) {
       this.promedioLuz = this.lightQueue.reduce((a, b) => a + b, 0) / this.lightQueue.length;
-      this.actualizarGrafica();
     }
   }
 
-  actualizarGrafica() {
-    this.chartOptions.series = [this.promedioLuz]; // Actualiza la gráfica con el nuevo promedio
-  }
+
 
   navigateToHome() {
     this.router.navigate(['/home']);

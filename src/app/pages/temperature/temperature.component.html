@@ -6,27 +6,27 @@
         <nav> 
             <a (click)="navigateTo('/home')">
                 <ion-icon name="home-outline"></ion-icon>
-                <span  *ngIf="!isCollapsed" class="link-text">Home</span>
+                <span class="link-text" *ngIf="!isCollapsed">Home</span>
             </a>
             <a (click)="navigateTo('/ambient')">
                 <ion-icon name="sunny-outline"></ion-icon>
-                <span  *ngIf="!isCollapsed" class="link-text">Luz Ambiental</span>
+                <span class="link-text" *ngIf="!isCollapsed">Luz Ambiental</span>
             </a>
             <a (click)="navigateTo('/heart-rate')">
                 <ion-icon name="heart-outline"></ion-icon>
-                <span  *ngIf="!isCollapsed" class="link-text">Ritmo Cardíaco</span>
+                <span class="link-text" *ngIf="!isCollapsed">Ritmo Cardíaco</span>
             </a>
             <a (click)="navigateTo('/temperature')">
                 <ion-icon name="thermometer-outline"></ion-icon>
-                <span  *ngIf="!isCollapsed" class="link-text">Temperatura Corporal</span>
+                <span class="link-text" *ngIf="!isCollapsed">Temperatura Corporal</span>
             </a>
             <a (click)="navigateTo('/gyroscope')">
                 <ion-icon name="compass-outline"></ion-icon>
-                <span  *ngIf="!isCollapsed" class="link-text">Giroscopio</span>
+                <span class="link-text" *ngIf="!isCollapsed">Giroscopio</span>
             </a>
             <a (click)="navigateTo('/settings')">
                 <ion-icon name="settings-outline"></ion-icon>
-                <span  *ngIf="!isCollapsed" class="link-text">Configuración</span>
+                <span class="link-text" *ngIf="!isCollapsed">Configuración</span>
             </a>
         </nav>
     </div>
@@ -37,31 +37,45 @@
                 <div class="card-content">
                     <div class="card-text">
                         <div class="temperature-value">
-                            {{ temperature }}°C
+                            {{ temperature | number:'1.1-1' }}°C
                         </div>
-                        <div class="description">Temperatura Corporal</div>
+                        <div class="description">Temperatura Actual</div>
                     </div>
                     <ion-icon name="thermometer-outline"></ion-icon>
                 </div>
             </div>
+
+            <div class="card average-card">
+                <div class="card-content">
+                    <div class="card-text">
+                        <div class="temperature-value">
+                            {{ averageTemperature | number:'1.1-1' }}°C
+                        </div>
+                        <div class="description">Promedio Histórico</div>
+                    </div>
+                    <ion-icon name="stats-chart-outline"></ion-icon>
+                </div>
+            </div>
         </div>
 
-        <div class="table-container">
-            <h3>Últimos 10 valores de temperatura</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>°C</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let value of temperatureHistory; let i = index">
-                        <td>{{ i + 1 }}</td>
-                        <td>{{ value }}°C</td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="data-container">
+            <div class="table-container">
+                <h3>Últimos 10 valores recibidos</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Temperatura (°C)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let reading of temperatureReadings">
+                            <td>{{ reading.id }}</td>
+                            <td>{{ reading.temperatura | number:'1.1-1' }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

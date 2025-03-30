@@ -1,23 +1,42 @@
 <div class="form-container">
     <div class="back-button">
-        <button (click)="navigateTo('/login')">
+        <button class="backButton" (click)="navigateTo('/login')">
             ← Volver
         </button>
     </div>
-    <form action="">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
         <h2>WellDesk</h2>
         <fieldset>
             <legend>Registro de usuario</legend>
-            <label for="username">Nombre:</label>
-            <input type="text" id="username" placeholder="Ingresa tu nombre" required>
+            
+            <label for="name">Nombre:</label>
+            <input type="text" id="name" formControlName="name" placeholder="Ingresa tu nombre" required>
+            
+            <label for="lastName">Apellido:</label>
+            <input type="text" id="lastName" formControlName="lastName" placeholder="Ingresa tu apellido" required>
+            
             <label for="email">Correo electrónico:</label>
-            <input type="email" id="email" placeholder="Ingresa tu correo electrónico" required>
+            <input type="email" id="email" formControlName="email" placeholder="Ingresa tu correo" required>
+            
             <label for="password">Contraseña:</label>
-            <input type="password" id="password" placeholder="Ingresa tu contraseña" required>
+            <input type="password" id="password" formControlName="password" placeholder="Mínimo 8 caracteres" required>
+            
             <label for="confirmPassword">Confirmar contraseña:</label>
-            <input type="password" id="confirmPassword" placeholder="Confirma tu contraseña" required>
-            <button type="submit">Registrarse</button>
+            <input type="password" id="confirmPassword" formControlName="confirmPassword" placeholder="Confirma tu contraseña" required>
+            
+            <label for="age">Edad:</label>
+            <input type="number" id="age" formControlName="age" placeholder="Ingresa tu edad" min="18" required>
+            
+            <label for="backupEmail">Correo para emergencias:</label>
+            <input type="email" id="backupEmail" formControlName="backupEmail" placeholder="Ingresa un correo" required>
+
+            <button type="submit" [disabled]="!registerForm.valid">Registrarse</button>
         </fieldset>
+        
+        <div class="form-errors" *ngIf="registerForm.errors?.['mismatch']">
+            Las contraseñas no coinciden
+        </div>
+        
         <a (click)="navigateTo('/login')">¿Ya tienes una cuenta? Haz clic aquí.</a>
     </form>
 </div>

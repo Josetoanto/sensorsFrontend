@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule, NgFor } from '@angular/common';
 import { Router } from '@angular/router';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { timer, Subscription } from 'rxjs';
+import { GyroscopeService, GyroscopeData } from '../../services/gyroscope.service'; 
 
 @Component({
   selector: 'app-gyroscope',
@@ -13,18 +15,108 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 export class GyroscopeComponent implements OnInit {
   inclination: number = 0; // Inclinación en grados
   inclinationHistory: number[] = [];
+  sensorDataHistory: GyroscopeData[] = [];
   isCollapsed = true;
+  private refreshSubscription!: Subscription;
 
 
-  constructor(private router: Router) {}
+
+  constructor(
+    private router: Router,
+    private gyroscopeService: GyroscopeService
+
+  ) {}
 
   ngOnInit(): void {
+    this.checkAuth();
+    this.initData();
+    this.setupAutoRefresh();
+    
     const storedIsCollapsed = localStorage.getItem('isCollapsed');
     if (storedIsCollapsed) {
       this.isCollapsed = JSON.parse(storedIsCollapsed);
     }
-    // Aquí se puede llamar a obtenerSensorData()
   }
+
+  ngOnDestroy(): void {
+    if (this.refreshSubscription) {
+      this.refreshSubscription.unsubscribe();
+    }
+  }
+
+  private checkAuth(): void {
+    const token = sessionStorage.getItem('token');
+    if (!token) {
+      this.router.navigate(['/login']);
+    }
+  }
+  private initData(): void {
+    const userId = 1;
+    
+    // Obtener todos los datos históricos
+    this.gyroscopeService.getAllGyroscopeData(userId).subscribe({
+      next: (data) => {
+        this.sensorDataHistory = data.slice(-10).reverse();
+        if (this.sensorDataHistory.length > 0) {
+          this.inclination = this.calculateInclination(
+            this.sensorDataHistory[0]
+          );
+        }
+      },
+      error: (err) => console.error('Error getting all data:', err)
+    });
+
+    // Obtener última lectura
+    this.getLatestGyroscopeData(userId);
+  }
+
+  
+  
+  private setupAutoRefresh(): void {
+    const userId = 1;
+    this.refreshSubscription = timer(0, 5000).subscribe(() => {
+      this.getLatestGyroscopeData(userId);
+    });
+  }
+
+  private getLatestGyroscopeData(userId: number): void {
+    this.gyroscopeService.getLatestGyroscopeData(userId).subscribe({
+      next: (data) => {
+        this.inclination = this.calculateInclination(data);
+        this.updateHistory(data);
+      },
+      error: (err) => console.error('Error getting latest:', err)
+    });
+  }
+
+  private updateHistory(newData: GyroscopeData): void {
+    // Verificar si el dato ya existe en el historial
+    const exists = this.sensorDataHistory.some(item => item.id === newData.id);
+    
+    if (!exists) {
+      // Añadir al principio del array
+      this.sensorDataHistory.unshift(newData);
+      
+      // Mantener solo los últimos 10 elementos
+      if (this.sensorDataHistory.length > 10) {
+        this.sensorDataHistory.pop();
+      }
+    }
+  }
+
+  public calculateInclination(data: GyroscopeData): number {
+    const tiltMagnitude = Math.sqrt(
+      Math.pow(data.giroX, 2) + 
+      Math.pow(data.giroY, 2) + 
+      Math.pow(data.giroZ, 2)
+    );
+    return Math.abs(Math.round(tiltMagnitude * 10) / 10);
+  }
+
+  trackBySensorData(index: number, item: GyroscopeData): number {
+    return item.id;
+  }
+
 
   toggleSidebar() {
     this.isCollapsed = !this.isCollapsed;

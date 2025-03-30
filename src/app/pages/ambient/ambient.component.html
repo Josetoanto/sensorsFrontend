@@ -38,38 +38,44 @@
                 <div class="card-content">
                     <div class="card-text">
                         <div class="light">{{ luzAmbiental }} lx</div>
-                        <div class="description">Luz Ambiental</div>
+                        <div class="description">Luz Ambiental Actual</div>
                     </div>
                     <ion-icon name="sunny-outline"></ion-icon>
                 </div>
             </div>
+
+            <!-- Nueva tarjeta para el promedio -->
+            <div class="card average-card">
+                <div class="card-content">
+                    <div class="card-text">
+                        <div class="light">{{ promedioLuz | number:'1.0-2' }} lx</div>
+                        <div class="description">Promedio Histórico</div>
+                    </div>
+    <ion-icon src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></ion-icon>
+                </div>
+            </div>
         </div>
 
-        <div class="table-container">
-            <h3>Últimos 10 valores recibidos</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Luz Ambiental (lx)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let value of lightQueue; let i = index">
-                        <td>{{ i + 1 }}</td>
-                        <td>{{ value }}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+        <div class="data-container">
+            <div class="table-container">
+                <h3>Últimos 10 valores recibidos</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Luz Ambiental (lx)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let reading of lightReadings; let i = index">
+                            <td>{{ reading.id }}</td>
+                            <td>{{ reading.luz }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
-        <div class="chart-container">
-            <h3>Promedio de Luz Ambiental</h3>
-            <apx-chart 
-                [series]="chartOptions.series"
-                [chart]="chartOptions.chart"
-                [labels]="chartOptions.labels">
-            </apx-chart>
+           
         </div>
     </div>
 </div>

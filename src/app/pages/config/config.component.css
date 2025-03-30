@@ -30,7 +30,7 @@
 }
 .toggle-button:hover {
     background-color: #f4f4f4; /* Color de fondo blanco */
-    color: #251a72; /* Color de texto azul oscuro */
+    color: black; /* Color de texto azul oscuro */
 }
 nav a {
     text-indent: 5px;

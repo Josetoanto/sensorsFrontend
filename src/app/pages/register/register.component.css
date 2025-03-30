@@ -135,8 +135,8 @@ legend {
         overflow-x: hidden;
     }
 
-    button {
-      display: none;
+    .backButton{
+        display: none;
     }
   }
   
