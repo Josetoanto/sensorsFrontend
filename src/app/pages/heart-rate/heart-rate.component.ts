@@ -72,7 +72,7 @@ export class HeartRateComponent implements OnInit, OnDestroy {
   }
 
   private initData(): void {
-    const userId = 1;
+    const userId = Number(sessionStorage.getItem('userId'));
     
     // Obtener última lectura
     this.getLatestHeartRate(userId);
@@ -105,7 +105,7 @@ export class HeartRateComponent implements OnInit, OnDestroy {
   }
 
   private setupAutoRefresh(): void {
-    const userId = 1;
+    const userId = Number(sessionStorage.getItem('userId'));
     this.refreshSubscription = timer(0, 60000).subscribe(() => {
       this.getLatestHeartRate(userId);
     });

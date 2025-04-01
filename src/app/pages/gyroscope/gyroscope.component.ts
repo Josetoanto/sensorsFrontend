@@ -60,7 +60,7 @@ export class GyroscopeComponent implements OnInit, OnDestroy {
   }
 
   private initData(): void {
-    const userId = 1;
+    const userId = Number(sessionStorage.getItem('userId'));
     
     // Obtener todos los datos históricos
     this.gyroscopeService.getAllGyroscopeData(userId).subscribe({
@@ -80,8 +80,8 @@ export class GyroscopeComponent implements OnInit, OnDestroy {
   }
 
   private setupAutoRefresh(): void {
-    const userId = 1;
-    this.refreshSubscription = timer(0, 5000).subscribe(() => {
+    const userId = Number(sessionStorage.getItem('userId'));
+    this.refreshSubscription = timer(0, 60000).subscribe(() => {
       this.getLatestGyroscopeData(userId);
     });
   }

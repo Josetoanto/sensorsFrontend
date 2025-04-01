@@ -64,12 +64,12 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   private initData(): void {
-    const userId = 1;
+    const userId = Number(sessionStorage.getItem('userId'));
     this.fetchAllSensorData(userId);
   }
 
   private setupAutoRefresh(): void {
-    const userId = 1;
+    const userId = Number(sessionStorage.getItem('userId'));
     this.refreshSubscription = timer(0, 60000).subscribe(() => {
       this.checkAuth();
       this.fetchAllSensorData(userId);
