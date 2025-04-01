@@ -25,7 +25,6 @@ export class HeartRateComponent implements OnInit, OnDestroy {
   private refreshSubscription!: Subscription;
   private websocketSubscription!: Subscription;
 
-  // Configuración de la gráfica
   chartData: any[] = [];
   view: [number, number] = [600, 300];
   showXAxis = true;
