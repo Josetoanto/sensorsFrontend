@@ -44,14 +44,13 @@
                 </div>
             </div>
 
-            <!-- Nueva tarjeta para el promedio -->
             <div class="card average-card">
                 <div class="card-content">
                     <div class="card-text">
                         <div class="light">{{ promedioLuz | number:'1.0-2' }} lx</div>
                         <div class="description">Promedio Histórico</div>
                     </div>
-    <ion-icon src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></ion-icon>
+                    <ion-icon src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></ion-icon>
                 </div>
             </div>
         </div>
@@ -75,7 +74,27 @@
                 </table>
             </div>
 
-           
+            <div class="chart-container">
+                <h3>Gráfica de Valores por ID</h3>
+                <ngx-charts-line-chart
+                    [view]="view"
+                    [scheme]="scheme"
+                    [results]="chartData"
+                    [gradient]="gradient"
+                    [xAxis]="showXAxis"
+                    [yAxis]="showYAxis"
+                    [legend]="showLegend"
+                    [showXAxisLabel]="showXAxisLabel"
+                    [showYAxisLabel]="showYAxisLabel"
+                    [xAxisLabel]="xAxisLabel"
+                    [yAxisLabel]="yAxisLabel"
+                    [autoScale]="true"
+                    [timeline]="false"
+                    [strokeWidth]="2"
+                    [strokeLinecap]="'round'"
+                    [strokeLinejoin]="'round'">
+                </ngx-charts-line-chart>
+            </div>
         </div>
     </div>
 </div>

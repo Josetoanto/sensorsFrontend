@@ -5,11 +5,12 @@ import { NgClass } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { timer, Subscription } from 'rxjs';
 import { HeartService } from '../../services/heart.service';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @Component({
   selector: 'app-heart-rate',
   templateUrl: './heart-rate.component.html',
-  imports: [NgFor, NgClass, CommonModule],
+  imports: [NgFor, NgClass, CommonModule, NgxChartsModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   styleUrl: './heart-rate.component.css'
 })
@@ -21,7 +22,18 @@ export class HeartRateComponent implements OnInit, OnDestroy {
   isCollapsed = true;
   private refreshSubscription!: Subscription;
 
-  
+  // Configuración de la gráfica
+  chartData: any[] = [];
+  view: [number, number] = [600, 300];
+  showXAxis = true;
+  showYAxis = true;
+  gradient = false;
+  showLegend = true;
+  showXAxisLabel = true;
+  xAxisLabel = 'ID';
+  showYAxisLabel = true;
+  yAxisLabel = 'Ritmo Cardíaco (bpm)';
+  scheme = 'cool';
 
   constructor(
     private router: Router,
@@ -64,6 +76,14 @@ export class HeartRateComponent implements OnInit, OnDestroy {
         this.heartReadings = data.slice(-10).reverse();
         this.heartRateQueue = data.slice(-10).map(item => item.bpm);
         this.calculateAverage();
+        // Actualizar datos de la gráfica
+        this.chartData = [{
+          name: 'Ritmo Cardíaco',
+          series: this.heartReadings.map(reading => ({
+            name: reading.id.toString(),
+            value: reading.bpm
+          }))
+        }];
       },
       error: (err) => console.error('Error getting all data:', err)
     });

@@ -5,12 +5,12 @@ import { NgClass } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { timer, Subscription } from 'rxjs';
 import { LightService } from '../../services/light.service';
-
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @Component({
   selector: 'app-ambient',
   templateUrl: './ambient.component.html',
-  imports: [NgFor, NgClass, CommonModule],
+  imports: [NgFor, NgClass, CommonModule, NgxChartsModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   styleUrl: './ambient.component.css'
 })
@@ -22,7 +22,18 @@ export class AmbientComponent implements OnInit, OnDestroy {
   isCollapsed = true;
   private refreshSubscription!: Subscription;
 
- 
+  // Configuración de la gráfica
+  chartData: any[] = [];
+  view: [number, number] = [600, 300];
+  showXAxis = true;
+  showYAxis = true;
+  gradient = false;
+  showLegend = true;
+  showXAxisLabel = true;
+  xAxisLabel = 'ID';
+  showYAxisLabel = true;
+  yAxisLabel = 'Luz (lx)';
+  scheme = 'cool';
 
   constructor(
     private router: Router,
@@ -65,6 +76,14 @@ export class AmbientComponent implements OnInit, OnDestroy {
       next: (data) => {
         this.lightReadings = data.slice(-10).reverse();
         this.lightQueue = data.slice(-10).map(item => item.luz);
+        // Actualizar datos de la gráfica
+        this.chartData = [{
+          name: 'Luz Ambiental',
+          series: this.lightReadings.map(reading => ({
+            name: reading.id.toString(),
+            value: reading.luz
+          }))
+        }];
       },
       error: (err) => console.error('Error getting all data:', err)
     });

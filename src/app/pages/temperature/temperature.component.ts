@@ -5,11 +5,12 @@ import { NgClass } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { timer, Subscription } from 'rxjs';
 import { TemperatureService } from '../../services/temperature.service';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @Component({
   selector: 'app-temperature',
   templateUrl: './temperature.component.html',
-  imports: [NgFor, NgClass, CommonModule],
+  imports: [NgFor, NgClass, CommonModule, NgxChartsModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   styleUrl: './temperature.component.css'
 })
@@ -20,6 +21,19 @@ export class TemperatureComponent implements OnInit, OnDestroy {
   averageTemperature: number = 0;
   isCollapsed = true;
   private refreshSubscription!: Subscription;
+
+  // Configuración de la gráfica
+  chartData: any[] = [];
+  view: [number, number] = [600, 300];
+  showXAxis = true;
+  showYAxis = true;
+  gradient = false;
+  showLegend = true;
+  showXAxisLabel = true;
+  xAxisLabel = 'ID';
+  showYAxisLabel = true;
+  yAxisLabel = 'Temperatura (°C)';
+  scheme = 'cool';
 
   constructor(
     private router: Router,
@@ -53,22 +67,33 @@ export class TemperatureComponent implements OnInit, OnDestroy {
   private initData(): void {
     const userId = 1;
     
+    // Obtener última lectura
     this.getLatestTemperature(userId);
     
+    // Obtener históricos
     this.temperatureService.getAllTemperatures(userId).subscribe({
       next: (data) => {
         this.temperatureReadings = data.slice(-10).reverse();
         this.temperatureQueue = data.slice(-10).map(item => item.temperatura);
         this.calculateAverage();
+        // Actualizar datos de la gráfica
+        this.chartData = [{
+          name: 'Temperatura',
+          series: this.temperatureReadings.map(reading => ({
+            name: reading.id.toString(),
+            value: reading.temperatura
+          }))
+        }];
       },
-      error: (err) => console.error('Error getting temperature data:', err)
+      error: (err) => console.error('Error getting all data:', err)
     });
 
+    // Obtener promedio
     this.temperatureService.getAverageTemperature(userId).subscribe({
       next: (avg) => {
         this.averageTemperature = avg.average_temperature;
       },
-      error: (err) => console.error('Error getting average temperature:', err)
+      error: (err) => console.error('Error getting average:', err)
     });
   }
 
@@ -85,7 +110,7 @@ export class TemperatureComponent implements OnInit, OnDestroy {
         this.temperature = data.temperatura;
         this.updateQueue(data.temperatura);
       },
-      error: (err) => console.error('Error getting latest temperature:', err)
+      error: (err) => console.error('Error getting latest:', err)
     });
   }
 
@@ -109,7 +134,27 @@ export class TemperatureComponent implements OnInit, OnDestroy {
   }
 
   // Métodos de navegación
-  navigateTo(route: string) {
-    this.router.navigate([route]);
+  navigateToHome() {
+    this.router.navigate(['/home']);
+  }
+
+  navigateToAmbient() {
+    this.router.navigate(['/ambient']);
+  }
+
+  navigateToSettings() {
+    this.router.navigate(['/settings']);
+  }
+
+  navigateToHeartRate() {
+    this.router.navigate(['/heart-rate']);
+  }
+
+  navigateToTemperature() {
+    this.router.navigate(['/temperature']);
+  }
+
+  navigateToGyroscope() {
+    this.router.navigate(['/gyroscope']);
   }
 }

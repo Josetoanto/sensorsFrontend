@@ -140,7 +140,28 @@ th {
     border-color: transparent;
     text-align: left;
 }
-
+.data-container {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+    width: 100%;
+}
+.table-container {
+    flex: 1;
+    max-width: 45%;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+.chart-container {
+    flex: 1;
+    max-width: 55%;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
 @media (max-width: 768px) {
     .dashboard-container {
         display: flex;
@@ -188,4 +209,13 @@ th {
         
     }
     
+    .data-container {
+        flex-direction: column;
+    }
+    
+    .table-container,
+    .chart-container {
+        max-width: 100%;
+        margin-left: 0;
+    }
 }

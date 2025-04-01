@@ -85,13 +85,6 @@ nav a:hover {
     width: 100%;
 }
 
-.chart-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-
 .card .card-text {
     display: flex;
     flex-direction: column;
@@ -121,18 +114,47 @@ nav a:hover {
 .card:hover ion-icon {
     color: white; /* Cambiar el color del icono y del texto al blanco */
 }
+.data-container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 20px;
+    width: 100%;
+}
+
 .table-container {
     color: #251a72;
     background: white;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    flex: 1;
+    min-width: 300px;
+    max-width: 45%;
 }
 
 .table-container h3 {
     font-size: 22px;
-
+    margin-bottom: 20px;
 }
+
+.chart-container {
+    color: #251a72;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    flex: 2;
+    min-width: 500px;
+    max-width: 55%;
+}
+
+.chart-container h3 {
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
 table {
     font-size: 15px;
     width: 100%;
@@ -191,10 +213,18 @@ th {
         max-width: 350px;
     }
 
-    .table-container {
-        margin-left: 80px;
-        max-width: 350px;
+    .data-container {
+        flex-direction: column;
+        align-items: center;
+    }
 
+    .table-container {
+        width: 100%;
+        max-width: 350px;
     }
     
+    .chart-container {
+        width: 100%;
+        max-width: 350px;
+    }
 }

@@ -66,10 +66,32 @@
                     <tbody>
                         <tr *ngFor="let reading of heartReadings">
                             <td>{{ reading.id }}</td>
-                            <td>{{ reading.bpm }}</td>
+                            <td>{{ reading.bpm | number:'1.0-2' }}</td>
                         </tr>
                     </tbody>
                 </table>
+            </div>
+
+            <div class="chart-container">
+                <h3>Gráfica de Valores por ID</h3>
+                <ngx-charts-line-chart
+                    [view]="view"
+                    [scheme]="scheme"
+                    [results]="chartData"
+                    [gradient]="gradient"
+                    [xAxis]="showXAxis"
+                    [yAxis]="showYAxis"
+                    [legend]="showLegend"
+                    [showXAxisLabel]="showXAxisLabel"
+                    [showYAxisLabel]="showYAxisLabel"
+                    [xAxisLabel]="xAxisLabel"
+                    [yAxisLabel]="yAxisLabel"
+                    [autoScale]="true"
+                    [timeline]="false"
+                    [strokeWidth]="2"
+                    [strokeLinecap]="'round'"
+                    [strokeLinejoin]="'round'">
+                </ngx-charts-line-chart>
             </div>
         </div>
     </div>
