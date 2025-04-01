@@ -17,10 +17,10 @@ import Swal from 'sweetalert2';
   styleUrl: './heart-rate.component.css'
 })
 export class HeartRateComponent implements OnInit, OnDestroy {
-  heartRate: number = 0;
+  heartRate: number | null = null;
   heartReadings: any[] = [];
   heartRateQueue: number[] = [];
-  averageHeartRate: number = 0;
+  averageHeartRate: number | null = null;
   isCollapsed = true;
   private refreshSubscription!: Subscription;
   private websocketSubscription!: Subscription;
@@ -115,10 +115,17 @@ export class HeartRateComponent implements OnInit, OnDestroy {
   private getLatestHeartRate(userId: number): void {
     this.heartService.getLatestHeartRate(userId).subscribe({
       next: (data) => {
-        this.heartRate = data.bpm;
-        this.updateQueue(data.bpm);
+        if (data && data.bpm !== undefined) {
+          this.heartRate = data.bpm;
+          this.updateQueue(data.bpm);
+        } else {
+          this.heartRate = null;
+        }
       },
-      error: (err) => console.error('Error getting latest:', err)
+      error: (err) => {
+        console.error('Error getting latest:', err);
+        this.heartRate = null;
+      }
     });
   }
 
@@ -133,6 +140,8 @@ export class HeartRateComponent implements OnInit, OnDestroy {
   private calculateAverage() {
     if (this.heartRateQueue.length > 0) {
       this.averageHeartRate = this.heartRateQueue.reduce((a, b) => a + b, 0) / this.heartRateQueue.length;
+    } else {
+      this.averageHeartRate = null;
     }
   }
 

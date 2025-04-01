@@ -97,4 +97,10 @@ navigateToGyroscope() {
     this.router.navigate(['/gyroscope']);
 }
 
+logout() {
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('userId');
+    this.router.navigate(['/login']);
+}
+
 }

@@ -104,3 +104,57 @@ nav a:hover {
     }
     
 }
+
+.logout-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 15px 30px;
+    background-color: gray;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 40px auto;
+    width: 85%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-weight: 500;
+    position: relative;
+    bottom: 20px;
+}
+
+.logout-button:hover {
+    background-color: #333333;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.logout-button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logout-button ion-icon {
+    font-size: 20px;
+    transition: transform 0.3s ease;
+}
+
+.logout-button:hover ion-icon {
+    transform: translateX(2px);
+}
+
+.logout-button span {
+    font-size: 15px;
+    letter-spacing: 0.5px;
+}
+
+@media (max-width: 768px) {
+    .logout-button {
+        width: 80%;
+        padding: 12px 24px;
+        margin: 30px auto;
+        bottom: 15px;
+    }
+}

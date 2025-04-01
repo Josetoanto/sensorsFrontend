@@ -36,7 +36,7 @@
             <div class="card heart-card">
                 <div class="card-content">
                     <div class="card-text">
-                        <div class="heart-rate">{{ heartRate ? (heartRate | number:'1.0-2') + ' bpm' : 'Sin datos' }}</div>
+                        <div class="heart-rate">{{ heartRate !== null ? (heartRate | number:'1.0-2') + ' bpm' : 'Sin datos' }}</div>
                         <div class="description">Ritmo Cardíaco Actual</div>
                     </div>
                     <ion-icon name="heart-outline"></ion-icon>
@@ -46,7 +46,7 @@
             <div class="card average-card">
                 <div class="card-content">
                     <div class="card-text">
-                        <div class="heart-rate">{{ averageHeartRate ? (averageHeartRate | number:'1.0-2') + ' bpm' : 'Sin datos' }}</div>
+                        <div class="heart-rate">{{ averageHeartRate !== null ? (averageHeartRate | number:'1.0-2') + ' bpm' : 'Sin datos' }}</div>
                         <div class="description">Promedio Histórico</div>
                     </div>
                     <ion-icon name="stats-chart-outline"></ion-icon>
