@@ -36,8 +36,11 @@
             <div class="card light-card">
                 <div class="card-content">
                     <div class="card-text">
-                        <div class="light">{{ luzAmbiental }} lx</div>
+                        <div class="light">{{ luzAmbiental }} <span class="unit">lx</span></div>
                         <div class="description">Luz Ambiental</div>
+                        <div class="status" [ngClass]="{'high': luzAmbiental > 500, 'normal': luzAmbiental <= 500}">
+                            {{ luzAmbiental > 500 ? 'Alta luminosidad' : 'Luminosidad normal' }}
+                        </div>
                     </div>
                     <ion-icon name="sunny-outline"></ion-icon>
                 </div>
@@ -45,8 +48,11 @@
             <div class="card heart-rate-card">
                 <div class="card-content">
                     <div class="card-text">
-                        <div class="heart-rate">{{ ritmoCardiaco }} BPM</div>
+                        <div class="heart-rate">{{ ritmoCardiaco }} <span class="unit">BPM</span></div>
                         <div class="description">Ritmo Cardíaco</div>
+                        <div class="status" [ngClass]="{'high': ritmoCardiaco > 100, 'normal': ritmoCardiaco <= 100}">
+                            {{ ritmoCardiaco > 100 ? 'Ritmo elevado' : 'Ritmo normal' }}
+                        </div>
                     </div>
                     <ion-icon name="heart-outline"></ion-icon>
                 </div>
@@ -54,8 +60,11 @@
             <div class="card temperature-card">
                 <div class="card-content">
                     <div class="card-text">
-                        <div class="temperature">{{ temperaturaCorporal }} °C</div>
+                        <div class="temperature">{{ temperaturaCorporal }} <span class="unit">°C</span></div>
                         <div class="description">Temperatura Corporal</div>
+                        <div class="status" [ngClass]="{'high': temperaturaCorporal > 37.5, 'normal': temperaturaCorporal <= 37.5}">
+                            {{ temperaturaCorporal > 37.5 ? 'Temperatura elevada' : 'Temperatura normal' }}
+                        </div>
                     </div>
                     <ion-icon name="thermometer-outline"></ion-icon>
                 </div>
@@ -63,8 +72,11 @@
             <div class="card gyroscope-card">
                 <div class="card-content">
                     <div class="card-text">
-                        <div class="gyroscope">{{ inclinacion }}°</div>
+                        <div class="gyroscope">{{ inclinacion }} <span class="unit">°</span></div>
                         <div class="description">Giroscopio</div>
+                        <div class="status" [ngClass]="{'high': inclinacion > 30, 'normal': inclinacion <= 30}">
+                            {{ inclinacion > 30 ? 'Inclinación significativa' : 'Inclinación normal' }}
+                        </div>
                     </div>
                     <ion-icon name="compass-outline"></ion-icon>
                 </div>
