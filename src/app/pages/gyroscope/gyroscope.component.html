@@ -38,7 +38,7 @@
 
                   <div class="card-text">
                     <div class="inclination-value">
-                      {{ inclination }}° 
+                      {{ inclination ? inclination + '°' : 'Sin datos' }}
                     </div>
                     <div class="description">Inclinación Corporal</div>
                   </div>
@@ -66,6 +66,9 @@
                         <td>{{ data.giroY }}°</td>
                         <td>{{ data.giroZ }}°</td>
                         <td>{{ calculateInclination(data) }}°</td>
+                    </tr>
+                    <tr *ngIf="!sensorDataHistory || sensorDataHistory.length === 0">
+                        <td colspan="5" class="no-data">No hay datos disponibles</td>
                     </tr>
                 </tbody>
             </table>

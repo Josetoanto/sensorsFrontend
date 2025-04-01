@@ -37,7 +37,7 @@
             <div class="card light-card">
                 <div class="card-content">
                     <div class="card-text">
-                        <div class="light">{{ luzAmbiental | number:'1.0-2' }} lx</div>
+                        <div class="light">{{ luzAmbiental ? (luzAmbiental | number:'1.0-2') + ' lx' : 'Sin datos' }}</div>
                         <div class="description">Luz Ambiental Actual</div>
                     </div>
                     <ion-icon name="sunny-outline"></ion-icon>
@@ -47,7 +47,7 @@
             <div class="card average-card">
                 <div class="card-content">
                     <div class="card-text">
-                        <div class="light">{{ promedioLuz | number:'1.0-2' }} lx</div>
+                        <div class="light">{{ promedioLuz ? (promedioLuz | number:'1.0-2') + ' lx' : 'Sin datos' }}</div>
                         <div class="description">Promedio Histórico</div>
                     </div>
                     <ion-icon name="stats-chart-outline"></ion-icon>
@@ -69,6 +69,9 @@
                         <tr *ngFor="let reading of lightReadings">
                             <td>{{ reading.id }}</td>
                             <td>{{ reading.luz | number:'1.0-2' }}</td>
+                        </tr>
+                        <tr *ngIf="!lightReadings || lightReadings.length === 0">
+                            <td colspan="2" class="no-data">No hay datos disponibles</td>
                         </tr>
                     </tbody>
                 </table>
@@ -94,6 +97,9 @@
                     [strokeLinecap]="'round'"
                     [strokeLinejoin]="'round'">
                 </ngx-charts-line-chart>
+                <div *ngIf="!chartData || chartData.length === 0" class="no-data-message">
+                    No hay datos suficientes para mostrar la gráfica
+                </div>
 
                 <div class="lighting-info">
                     <h3>Niveles de Iluminación</h3>

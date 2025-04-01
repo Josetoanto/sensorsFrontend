@@ -36,7 +36,7 @@
             <div class="card heart-card">
                 <div class="card-content">
                     <div class="card-text">
-                        <div class="heart-rate">{{ heartRate | number:'1.0-2' }} bpm</div>
+                        <div class="heart-rate">{{ heartRate ? (heartRate | number:'1.0-2') + ' bpm' : 'Sin datos' }}</div>
                         <div class="description">Ritmo Cardíaco Actual</div>
                     </div>
                     <ion-icon name="heart-outline"></ion-icon>
@@ -46,7 +46,7 @@
             <div class="card average-card">
                 <div class="card-content">
                     <div class="card-text">
-                        <div class="heart-rate">{{ averageHeartRate | number:'1.0-2' }} bpm</div>
+                        <div class="heart-rate">{{ averageHeartRate ? (averageHeartRate | number:'1.0-2') + ' bpm' : 'Sin datos' }}</div>
                         <div class="description">Promedio Histórico</div>
                     </div>
                     <ion-icon name="stats-chart-outline"></ion-icon>
@@ -68,6 +68,9 @@
                         <tr *ngFor="let reading of heartReadings">
                             <td>{{ reading.id }}</td>
                             <td>{{ reading.bpm | number:'1.0-2' }}</td>
+                        </tr>
+                        <tr *ngIf="!heartReadings || heartReadings.length === 0">
+                            <td colspan="2" class="no-data">No hay datos disponibles</td>
                         </tr>
                     </tbody>
                 </table>
@@ -93,6 +96,9 @@
                     [strokeLinecap]="'round'"
                     [strokeLinejoin]="'round'">
                 </ngx-charts-line-chart>
+                <div *ngIf="!chartData || chartData.length === 0" class="no-data-message">
+                    No hay datos suficientes para mostrar la gráfica
+                </div>
 
                 <div class="lighting-info">
                     <h3>Niveles de Ritmo Cardíaco</h3>

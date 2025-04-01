@@ -18,11 +18,10 @@ import Swal from 'sweetalert2';
   styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  // Variables para los datos de los sensores
-  luzAmbiental: number = 300; // Ejemplo de valor inicial en lux
-  ritmoCardiaco: number = 72; // Ejemplo de valor inicial en BPM
-  temperaturaCorporal: number = 36.5; // Ejemplo de valor inicial en °C
-  inclinacion: number = 15; // Ejemplo de valor inicial en grados
+  luzAmbiental: number | null = null;
+  ritmoCardiaco: number | null = null;
+  temperaturaCorporal: number | null = null;
+  inclinacion: number | null = null;
   isCollapsed = true;
   private refreshSubscription!: Subscription;
   private websocketSubscription!: Subscription;
@@ -109,7 +108,10 @@ export class HomeComponent implements OnInit, OnDestroy {
       next: (data) => {
         this.inclinacion = this.calculateInclination(data);
       },
-      error: (err) => this.handleError(err)
+      error: (err) => {
+        this.handleError(err);
+        this.inclinacion = null;
+      }
     });
 
     // Ritmo cardíaco
@@ -117,7 +119,10 @@ export class HomeComponent implements OnInit, OnDestroy {
       next: (data) => {
         this.ritmoCardiaco = data.bpm;
       },
-      error: (err) => this.handleError(err)
+      error: (err) => {
+        this.handleError(err);
+        this.ritmoCardiaco = null;
+      }
     });
 
     // Luz ambiental
@@ -125,7 +130,10 @@ export class HomeComponent implements OnInit, OnDestroy {
       next: (data) => {
         this.luzAmbiental = data.luz;
       },
-      error: (err) => this.handleError(err)
+      error: (err) => {
+        this.handleError(err);
+        this.luzAmbiental = null;
+      }
     });
 
     // Temperatura
@@ -133,7 +141,10 @@ export class HomeComponent implements OnInit, OnDestroy {
       next: (data) => {
         this.temperaturaCorporal = data.temperatura;
       },
-      error: (err) => this.handleError(err)
+      error: (err) => {
+        this.handleError(err);
+        this.temperaturaCorporal = null;
+      }
     });
   }
 

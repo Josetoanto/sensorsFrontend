@@ -36,7 +36,7 @@
             <div class="card temperature-card">
                 <div class="card-content">
                     <div class="card-text">
-                        <div class="temperature">{{ temperature | number:'1.1-1' }}°C</div>
+                        <div class="temperature">{{ temperature ? (temperature | number:'1.1-1') + '°C' : 'Sin datos' }}</div>
                         <div class="description">Temperatura Actual</div>
                     </div>
                     <ion-icon name="thermometer-outline"></ion-icon>
@@ -46,7 +46,7 @@
             <div class="card average-card">
                 <div class="card-content">
                     <div class="card-text">
-                        <div class="temperature">{{ averageTemperature | number:'1.1-1' }}°C</div>
+                        <div class="temperature">{{ averageTemperature ? (averageTemperature | number:'1.1-1') + '°C' : 'Sin datos' }}</div>
                         <div class="description">Promedio Histórico</div>
                     </div>
                     <ion-icon name="stats-chart-outline"></ion-icon>
@@ -68,6 +68,9 @@
                         <tr *ngFor="let reading of temperatureReadings">
                             <td>{{ reading.id }}</td>
                             <td>{{ reading.temperatura | number:'1.1-1' }}</td>
+                        </tr>
+                        <tr *ngIf="!temperatureReadings || temperatureReadings.length === 0">
+                            <td colspan="2" class="no-data">No hay datos disponibles</td>
                         </tr>
                     </tbody>
                 </table>
@@ -93,6 +96,9 @@
                     [strokeLinecap]="'round'"
                     [strokeLinejoin]="'round'">
                 </ngx-charts-line-chart>
+                <div *ngIf="!chartData || chartData.length === 0" class="no-data-message">
+                    No hay datos suficientes para mostrar la gráfica
+                </div>
 
                 <div class="lighting-info">
                     <h3>Niveles de Temperatura</h3>
