@@ -164,6 +164,44 @@ th {
     border-color: transparent;
     text-align: left;
 }
+.lighting-info {
+    margin-top: 15px;
+    padding: 10px;
+}
+.lighting-info h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #e63946;
+}
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+.info-card {
+    background: white;
+    padding: 8px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 12px;
+}
+.info-card h4 {
+    margin: 0 0 5px 0;
+    color: #e63946;
+}
+.info-card p {
+    margin: 2px 0;
+    color: #666;
+}
+.low-light {
+    border-left: 3px solid #2196f3;
+}
+.optimal-light {
+    border-left: 3px solid #4caf50;
+}
+.high-light {
+    border-left: 3px solid #f44336;
+}
 @media (max-width: 768px) {
     .dashboard-container {
         display: flex;
@@ -209,5 +247,11 @@ th {
     .chart-container {
         width: 100%;
         max-width: 350px;
+    }
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+    .info-card {
+        margin-bottom: 5px;
     }
 }

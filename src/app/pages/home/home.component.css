@@ -182,6 +182,11 @@ nav a:hover {
     color: #c62828;
 }
 
+.status.low {
+    background-color: #e3f2fd;
+    color: #1565c0;
+}
+
 @media (max-width: 768px) {
     .dashboard-container {
         display: flex;
