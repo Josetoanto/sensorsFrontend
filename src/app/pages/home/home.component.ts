@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { CommonModule, NgFor } from '@angular/common';
 import { Router } from '@angular/router';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { Subscription, timer } from 'rxjs';
@@ -7,36 +7,39 @@ import { GyroscopeService } from '../../services/gyroscope.service';
 import { HeartService } from '../../services/heart.service';
 import { LightService } from '../../services/light.service';
 import { TemperatureService } from '../../services/temperature.service';
+import { WebsocketService } from '../../services/websocket.service';
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule],
+  imports: [NgFor, CommonModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   // Variables para los datos de los sensores
   luzAmbiental: number = 300; // Ejemplo de valor inicial en lux
   ritmoCardiaco: number = 72; // Ejemplo de valor inicial en BPM
   temperaturaCorporal: number = 36.5; // Ejemplo de valor inicial en °C
   inclinacion: number = 15; // Ejemplo de valor inicial en grados
-  isCollapsed = false;
+  isCollapsed = true;
   private refreshSubscription!: Subscription;
-
+  private websocketSubscription!: Subscription;
 
   constructor(
     private router: Router,
     private gyroscopeService: GyroscopeService,
     private heartService: HeartService,
     private lightService: LightService,
-    private temperatureService: TemperatureService
+    private temperatureService: TemperatureService,
+    private websocketService: WebsocketService
   ) {}
 
   ngOnInit(): void {
     this.checkAuth();
     this.initData();
     this.setupAutoRefresh();
+    this.setupWebSocket();
     
     const storedIsCollapsed = localStorage.getItem('isCollapsed');
     if (storedIsCollapsed) {
@@ -47,6 +50,9 @@ export class HomeComponent implements OnInit {
   ngOnDestroy(): void {
     if (this.refreshSubscription) {
       this.refreshSubscription.unsubscribe();
+    }
+    if (this.websocketSubscription) {
+      this.websocketSubscription.unsubscribe();
     }
   }
 
@@ -68,6 +74,20 @@ export class HomeComponent implements OnInit {
       this.checkAuth();
       this.fetchAllSensorData(userId);
     });
+  }
+
+  private setupWebSocket(): void {
+    this.websocketSubscription = this.websocketService.listenForNotifications()
+      .subscribe({
+        next: (notification) => {
+          console.log('Nueva notificación recibida:', notification);
+          alert(`Nueva notificación: ${JSON.stringify(notification)}`);
+        },
+        error: (error) => {
+          console.error('Error en WebSocket:', error);
+          alert('Error al recibir datos del WebSocket');
+        }
+      });
   }
 
   private fetchAllSensorData(userId: number): void {

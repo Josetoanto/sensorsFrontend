@@ -5,6 +5,7 @@ import { NgClass } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { timer, Subscription } from 'rxjs';
 import { HeartService } from '../../services/heart.service';
+import { WebsocketService } from '../../services/websocket.service';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @Component({
@@ -21,6 +22,7 @@ export class HeartRateComponent implements OnInit, OnDestroy {
   averageHeartRate: number = 0;
   isCollapsed = true;
   private refreshSubscription!: Subscription;
+  private websocketSubscription!: Subscription;
 
   // Configuración de la gráfica
   chartData: any[] = [];
@@ -37,13 +39,15 @@ export class HeartRateComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
-    private heartService: HeartService
+    private heartService: HeartService,
+    private websocketService: WebsocketService
   ) {}
 
   ngOnInit(): void {
     this.checkAuth();
     this.initData();
     this.setupAutoRefresh();
+    this.setupWebSocket();
     
     const storedIsCollapsed = localStorage.getItem('isCollapsed');
     if (storedIsCollapsed) {
@@ -54,6 +58,9 @@ export class HeartRateComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if (this.refreshSubscription) {
       this.refreshSubscription.unsubscribe();
+    }
+    if (this.websocketSubscription) {
+      this.websocketSubscription.unsubscribe();
     }
   }
 
@@ -128,7 +135,36 @@ export class HeartRateComponent implements OnInit, OnDestroy {
     }
   }
 
-  
+  private setupWebSocket(): void {
+    this.websocketSubscription = this.websocketService.listenForNotifications()
+      .subscribe({
+        next: (notification) => {
+          console.log('Nueva notificación recibida:', notification);
+          if (notification.type === 'heart_rate') {
+            this.heartRate = notification.value;
+            this.updateQueue(notification.value);
+            this.updateChart();
+            alert(`Nueva lectura de frecuencia cardíaca: ${notification.value} bpm`);
+          } else {
+            alert(`Nueva notificación: ${JSON.stringify(notification)}`);
+          }
+        },
+        error: (error) => {
+          console.error('Error en WebSocket:', error);
+          alert('Error al recibir datos del WebSocket');
+        }
+      });
+  }
+
+  private updateChart(): void {
+    this.chartData = [{
+      name: 'Frecuencia Cardíaca',
+      series: this.heartReadings.map(reading => ({
+        name: reading.id.toString(),
+        value: reading.bpm
+      }))
+    }];
+  }
 
   toggleSidebar() {
     this.isCollapsed = !this.isCollapsed;

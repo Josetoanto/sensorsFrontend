@@ -1,36 +1,40 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule, NgFor } from '@angular/common';
 import { Router } from '@angular/router';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { timer, Subscription } from 'rxjs';
-import { GyroscopeService, GyroscopeData } from '../../services/gyroscope.service'; 
+import { GyroscopeService, GyroscopeData } from '../../services/gyroscope.service';
+import { WebsocketService } from '../../services/websocket.service';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @Component({
   selector: 'app-gyroscope',
-  imports: [NgFor, CommonModule],
+  imports: [NgFor, CommonModule, NgxChartsModule],
   templateUrl: './gyroscope.component.html',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   styleUrl: './gyroscope.component.css'
 })
-export class GyroscopeComponent implements OnInit {
+export class GyroscopeComponent implements OnInit, OnDestroy {
   inclination: number = 0; // Inclinación en grados
   inclinationHistory: number[] = [];
   sensorDataHistory: GyroscopeData[] = [];
+  gyroscopeData: any = { x: 0, y: 0, z: 0 };
+  gyroscopeReadings: any[] = [];
   isCollapsed = true;
   private refreshSubscription!: Subscription;
-
-
+  private websocketSubscription!: Subscription;
 
   constructor(
     private router: Router,
-    private gyroscopeService: GyroscopeService
-
+    private gyroscopeService: GyroscopeService,
+    private websocketService: WebsocketService
   ) {}
 
   ngOnInit(): void {
     this.checkAuth();
     this.initData();
     this.setupAutoRefresh();
+    this.setupWebSocket();
     
     const storedIsCollapsed = localStorage.getItem('isCollapsed');
     if (storedIsCollapsed) {
@@ -42,6 +46,9 @@ export class GyroscopeComponent implements OnInit {
     if (this.refreshSubscription) {
       this.refreshSubscription.unsubscribe();
     }
+    if (this.websocketSubscription) {
+      this.websocketSubscription.unsubscribe();
+    }
   }
 
   private checkAuth(): void {
@@ -50,6 +57,7 @@ export class GyroscopeComponent implements OnInit {
       this.router.navigate(['/login']);
     }
   }
+
   private initData(): void {
     const userId = 1;
     
@@ -70,8 +78,6 @@ export class GyroscopeComponent implements OnInit {
     this.getLatestGyroscopeData(userId);
   }
 
-  
-  
   private setupAutoRefresh(): void {
     const userId = 1;
     this.refreshSubscription = timer(0, 5000).subscribe(() => {
@@ -117,7 +123,6 @@ export class GyroscopeComponent implements OnInit {
     return item.id;
   }
 
-
   toggleSidebar() {
     this.isCollapsed = !this.isCollapsed;
     localStorage.setItem('isCollapsed', JSON.stringify(this.isCollapsed));
@@ -135,5 +140,30 @@ export class GyroscopeComponent implements OnInit {
     this.router.navigate([route]);
   }
 
-  
+  private setupWebSocket(): void {
+    this.websocketSubscription = this.websocketService.listenForNotifications()
+      .subscribe({
+        next: (notification) => {
+          console.log('Nueva notificación recibida:', notification);
+          if (notification.type === 'gyroscope') {
+            this.gyroscopeData = notification.value;
+            this.updateReadings(notification.value);
+            alert(`Nueva lectura del giroscopio:\nX: ${notification.value.x}\nY: ${notification.value.y}\nZ: ${notification.value.z}`);
+          } else {
+            alert(`Nueva notificación: ${JSON.stringify(notification)}`);
+          }
+        },
+        error: (error) => {
+          console.error('Error en WebSocket:', error);
+          alert('Error al recibir datos del WebSocket');
+        }
+      });
+  }
+
+  private updateReadings(newData: any): void {
+    this.gyroscopeReadings.push(newData);
+    if (this.gyroscopeReadings.length > 10) {
+      this.gyroscopeReadings.shift();
+    }
+  }
 }

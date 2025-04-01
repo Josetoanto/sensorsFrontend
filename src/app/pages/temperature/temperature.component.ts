@@ -5,6 +5,7 @@ import { NgClass } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { timer, Subscription } from 'rxjs';
 import { TemperatureService } from '../../services/temperature.service';
+import { WebsocketService } from '../../services/websocket.service';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @Component({
@@ -21,6 +22,7 @@ export class TemperatureComponent implements OnInit, OnDestroy {
   averageTemperature: number = 0;
   isCollapsed = true;
   private refreshSubscription!: Subscription;
+  private websocketSubscription!: Subscription;
 
   // Configuración de la gráfica
   chartData: any[] = [];
@@ -37,13 +39,15 @@ export class TemperatureComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
-    private temperatureService: TemperatureService
+    private temperatureService: TemperatureService,
+    private websocketService: WebsocketService
   ) {}
 
   ngOnInit(): void {
     this.checkAuth();
     this.initData();
     this.setupAutoRefresh();
+    this.setupWebSocket();
     
     const storedIsCollapsed = localStorage.getItem('isCollapsed');
     if (storedIsCollapsed) {
@@ -51,9 +55,43 @@ export class TemperatureComponent implements OnInit, OnDestroy {
     }
   }
 
+  private setupWebSocket(): void {
+    this.websocketSubscription = this.websocketService.listenForNotifications()
+      .subscribe({
+        next: (notification) => {
+          console.log('Nueva notificación recibida:', notification);
+          if (notification.type === 'temperature') {
+            this.temperature = notification.value;
+            this.updateQueue(notification.value);
+            this.updateChart();
+            alert(`Nueva lectura de temperatura: ${notification.value}°C`);
+          } else {
+            alert(`Nueva notificación: ${JSON.stringify(notification)}`);
+          }
+        },
+        error: (error) => {
+          console.error('Error en WebSocket:', error);
+          alert('Error al recibir datos del WebSocket');
+        }
+      });
+  }
+
+  private updateChart(): void {
+    this.chartData = [{
+      name: 'Temperatura',
+      series: this.temperatureReadings.map(reading => ({
+        name: reading.id.toString(),
+        value: reading.temperatura
+      }))
+    }];
+  }
+
   ngOnDestroy(): void {
     if (this.refreshSubscription) {
       this.refreshSubscription.unsubscribe();
+    }
+    if (this.websocketSubscription) {
+      this.websocketSubscription.unsubscribe();
     }
   }
 
