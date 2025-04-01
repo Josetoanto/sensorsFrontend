@@ -16,7 +16,8 @@
     "moduleResolution": "bundler",
     "importHelpers": true,
     "target": "ES2022",
-    "module": "ES2022"
+    "module": "ES2022",
+    "allowSyntheticDefaultImports": true, // Permite importar correctamente módulos CommonJS como sweetalert2
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
