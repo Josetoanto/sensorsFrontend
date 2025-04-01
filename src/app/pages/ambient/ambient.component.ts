@@ -7,6 +7,7 @@ import { timer, Subscription } from 'rxjs';
 import { LightService } from '../../services/light.service';
 import { WebsocketService } from '../../services/websocket.service';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-ambient',
@@ -64,14 +65,32 @@ export class AmbientComponent implements OnInit, OnDestroy {
             this.luzAmbiental = notification.value;
             this.updateQueue(notification.value);
             this.updateChart();
-            alert(`Nueva lectura de luz: ${notification.value} lx`);
+            Swal.fire({
+              title: 'Nueva lectura de luz',
+              text: `${notification.value} lx`,
+              icon: 'info',
+              timer: 3000,
+              showConfirmButton: false
+            });
           } else {
-            alert(`Nueva notificación: ${JSON.stringify(notification)}`);
+            Swal.fire({
+              title: 'Nueva notificación',
+              text: notification.mensaje || JSON.stringify(notification),
+              icon: 'info',
+              timer: 5000,
+              showConfirmButton: false
+            });
           }
         },
         error: (error) => {
           console.error('Error en WebSocket:', error);
-          alert('Error al recibir datos del WebSocket');
+          Swal.fire({
+            title: 'Error',
+            text: 'Error al recibir datos del WebSocket',
+            icon: 'error',
+            timer: 3000,
+            showConfirmButton: false
+          });
         }
       });
   }

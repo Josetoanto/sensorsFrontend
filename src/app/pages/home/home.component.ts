@@ -8,6 +8,7 @@ import { HeartService } from '../../services/heart.service';
 import { LightService } from '../../services/light.service';
 import { TemperatureService } from '../../services/temperature.service';
 import { WebsocketService } from '../../services/websocket.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-home',
@@ -81,11 +82,23 @@ export class HomeComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (notification) => {
           console.log('Nueva notificación recibida:', notification);
-          alert(`Nueva notificación: ${JSON.stringify(notification)}`);
+          Swal.fire({
+            title: 'Nueva notificación',
+            text: notification.mensaje || JSON.stringify(notification),
+            icon: 'info',
+            timer: 5000,
+            showConfirmButton: false
+          });
         },
         error: (error) => {
           console.error('Error en WebSocket:', error);
-          alert('Error al recibir datos del WebSocket');
+          Swal.fire({
+            title: 'Error',
+            text: 'Error al recibir datos del WebSocket',
+            icon: 'error',
+            timer: 3000,
+            showConfirmButton: false
+          });
         }
       });
   }

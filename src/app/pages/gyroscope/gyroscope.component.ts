@@ -6,6 +6,7 @@ import { timer, Subscription } from 'rxjs';
 import { GyroscopeService, GyroscopeData } from '../../services/gyroscope.service';
 import { WebsocketService } from '../../services/websocket.service';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-gyroscope',
@@ -148,14 +149,32 @@ export class GyroscopeComponent implements OnInit, OnDestroy {
           if (notification.type === 'gyroscope') {
             this.gyroscopeData = notification.value;
             this.updateReadings(notification.value);
-            alert(`Nueva lectura del giroscopio:\nX: ${notification.value.x}\nY: ${notification.value.y}\nZ: ${notification.value.z}`);
+            Swal.fire({
+              title: 'Nueva lectura del giroscopio',
+              html: `X: ${notification.value.x}<br>Y: ${notification.value.y}<br>Z: ${notification.value.z}`,
+              icon: 'info',
+              timer: 3000,
+              showConfirmButton: false
+            });
           } else {
-            alert(`Nueva notificación: ${JSON.stringify(notification)}`);
+            Swal.fire({
+              title: 'Nueva notificación',
+              text: notification.mensaje || JSON.stringify(notification),
+              icon: 'info',
+              timer: 5000,
+              showConfirmButton: false
+            });
           }
         },
         error: (error) => {
           console.error('Error en WebSocket:', error);
-          alert('Error al recibir datos del WebSocket');
+          Swal.fire({
+            title: 'Error',
+            text: 'Error al recibir datos del WebSocket',
+            icon: 'error',
+            timer: 3000,
+            showConfirmButton: false
+          });
         }
       });
   }
