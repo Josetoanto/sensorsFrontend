@@ -56,7 +56,7 @@ nav a .link-text {
 }
 nav a:hover {
     background-color: #f4f4f4;
-    color: black;
+    color: #ffa600;
 }
 .content {
     flex: 1;
@@ -85,19 +85,12 @@ nav a:hover {
     justify-content: space-between;
     width: 100%;
 }
-.chart-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
 .card .card-text {
     display: flex;
     flex-direction: column;
     text-align: left;
 }
-
-.card .temperature,
-.card .humidity {
+.card .temperature {
     font-size: 1.5em;
     color: #ffa600; /* Naranja */
 }
@@ -115,10 +108,17 @@ nav a:hover {
     color: white;
 }
 .card:hover .card-text .temperature,
-.card:hover .card-text .humidity,
 .card:hover .card-text .description,
 .card:hover ion-icon {
     color: white;
+}
+.data-container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 20px;
+    width: 100%;
 }
 .table-container {
     color: #ffa600;
@@ -126,9 +126,27 @@ nav a:hover {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    flex: 1;
+    min-width: 300px;
+    max-width: 45%;
 }
 .table-container h3 {
     font-size: 22px;
+    margin-bottom: 20px;
+}
+.chart-container {
+    color: #ffa600;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    flex: 2;
+    min-width: 500px;
+    max-width: 55%;
+}
+.chart-container h3 {
+    font-size: 22px;
+    margin-bottom: 20px;
 }
 table {
     font-size: 15px;
@@ -146,32 +164,6 @@ th {
     border-color: transparent;
     text-align: left;
 }
-
-.data-container {
-    display: flex;
-    gap: 2rem;
-    margin-top: 2rem;
-    width: 100%;
-}
-
-.table-container {
-    flex: 1;
-    max-width: 45%;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-
-.chart-container {
-    flex: 1;
-    max-width: 55%;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-
 @media (max-width: 768px) {
     .dashboard-container {
         display: flex;
@@ -212,19 +204,18 @@ th {
         max-width: 350px;
     }
 
-    .table-container {
-        margin-left: 80px;
-        max-width: max-content;
-
-    }
-    
     .data-container {
         flex-direction: column;
+        align-items: center;
+    }
+
+    .table-container {
+        width: 100%;
+        max-width: 350px;
     }
     
-    .table-container,
     .chart-container {
-        max-width: 100%;
-        margin-left: 0;
+        width: 100%;
+        max-width: 350px;
     }
 }

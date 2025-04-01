@@ -100,7 +100,7 @@ nav a:hover {
     text-align: left;
 }
 .card .temperature,
-.card .humidity {
+.card .inclination-value {
     font-size: 1.5em;
     color: #2a9d8f; /* Verde */
 }
@@ -118,7 +118,7 @@ nav a:hover {
     color: white;
 }
 .card:hover .card-text .temperature,
-.card:hover .card-text .humidity,
+.card:hover .card-text .inclination-value,
 .card:hover .card-text .description,
 .card:hover ion-icon {
     color: white;

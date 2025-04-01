@@ -36,7 +36,7 @@
             <div class="card heart-card">
                 <div class="card-content">
                     <div class="card-text">
-                        <div class="heart-rate">{{ heartRate }} bpm</div>
+                        <div class="heart-rate">{{ heartRate | number:'1.0-2' }} bpm</div>
                         <div class="description">Ritmo Cardíaco Actual</div>
                     </div>
                     <ion-icon name="heart-outline"></ion-icon>
@@ -49,6 +49,7 @@
                         <div class="heart-rate">{{ averageHeartRate | number:'1.0-2' }} bpm</div>
                         <div class="description">Promedio Histórico</div>
                     </div>
+                    <ion-icon name="stats-chart-outline"></ion-icon>
                 </div>
             </div>
         </div>

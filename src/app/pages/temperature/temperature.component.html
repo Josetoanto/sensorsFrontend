@@ -20,7 +20,7 @@
                 <ion-icon name="thermometer-outline"></ion-icon>
                 <span class="link-text" *ngIf="!isCollapsed">Temperatura Corporal</span>
             </a>
-            <a (click)="navigateToGyroscope() ">
+            <a (click)="navigateToGyroscope()">
                 <ion-icon name="compass-outline"></ion-icon>
                 <span class="link-text" *ngIf="!isCollapsed">Giroscopio</span>
             </a>
@@ -36,9 +36,7 @@
             <div class="card temperature-card">
                 <div class="card-content">
                     <div class="card-text">
-                        <div class="temperature-value">
-                            {{ temperature | number:'1.1-1' }}°C
-                        </div>
+                        <div class="temperature">{{ temperature | number:'1.1-1' }}°C</div>
                         <div class="description">Temperatura Actual</div>
                     </div>
                     <ion-icon name="thermometer-outline"></ion-icon>
@@ -48,9 +46,7 @@
             <div class="card average-card">
                 <div class="card-content">
                     <div class="card-text">
-                        <div class="temperature-value">
-                            {{ averageTemperature | number:'1.1-1' }}°C
-                        </div>
+                        <div class="temperature">{{ averageTemperature | number:'1.1-1' }}°C</div>
                         <div class="description">Promedio Histórico</div>
                     </div>
                     <ion-icon name="stats-chart-outline"></ion-icon>

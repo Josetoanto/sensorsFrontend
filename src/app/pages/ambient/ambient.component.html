@@ -37,7 +37,7 @@
             <div class="card light-card">
                 <div class="card-content">
                     <div class="card-text">
-                        <div class="light">{{ luzAmbiental }} lx</div>
+                        <div class="light">{{ luzAmbiental | number:'1.0-2' }} lx</div>
                         <div class="description">Luz Ambiental Actual</div>
                     </div>
                     <ion-icon name="sunny-outline"></ion-icon>
@@ -50,7 +50,7 @@
                         <div class="light">{{ promedioLuz | number:'1.0-2' }} lx</div>
                         <div class="description">Promedio Histórico</div>
                     </div>
-                    <ion-icon src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></ion-icon>
+                    <ion-icon name="stats-chart-outline"></ion-icon>
                 </div>
             </div>
         </div>
@@ -66,9 +66,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let reading of lightReadings; let i = index">
+                        <tr *ngFor="let reading of lightReadings">
                             <td>{{ reading.id }}</td>
-                            <td>{{ reading.luz }}</td>
+                            <td>{{ reading.luz | number:'1.0-2' }}</td>
                         </tr>
                     </tbody>
                 </table>

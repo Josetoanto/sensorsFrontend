@@ -55,7 +55,7 @@ nav a .link-text {
 }
 nav a:hover {
     background-color: #f4f4f4; /* Color de fondo blanco */
-    color: black; /* Color de texto azul oscuro */
+    color: #251a72; /* Color de texto azul oscuro */
 }
 .content {
     flex: 1;
@@ -90,26 +90,24 @@ nav a:hover {
     flex-direction: column;
     text-align: left;
 }
-.card .temperature,
-.card .humidity {
+.card .light {
     font-size: 1.5em;
-    color: #251a72; /* Azul */
+    color: #251a72;
 }
 .card .description {
     font-size: 0.9em;
-    color: #888; /* Gris claro */
+    color: #888;
 }
 .card ion-icon {
     font-size: 2em;
-    color: #251a72; /* Azul */
+    color: #251a72;
     transition: color 0.3s;
 }
 .card:hover {
     background-color: #251a72;
     color: white; /* Cambiar el color del texto al blanco */
 }
-.card:hover .card-text .temperature,
-.card:hover .card-text .humidity,
+.card:hover .card-text .light,
 .card:hover .card-text .description,
 .card:hover ion-icon {
     color: white; /* Cambiar el color del icono y del texto al blanco */

@@ -11,6 +11,7 @@
     padding: 20px;
     height: 100vh;
     transition: width 0.3s;
+    overflow: hidden; /* Para manejar contenido fuera de los límites al colapsar */
 }
 .sidebar-collapsed {
     width: 50px;
@@ -34,7 +35,6 @@
 }
 nav a {
     text-indent: 5px;
-
     display: flex;
     align-items: center;
     color: white;
@@ -42,16 +42,21 @@ nav a {
     padding: 15px;
     border-radius: 5px;
     transition: background-color 0.3s, color 0.3s;
+    white-space: nowrap;
+    overflow: hidden;
 }
 nav a ion-icon {
     font-size: 1.3em;
+    flex-shrink: 0;
 }
 nav a .link-text {
     margin-left: 10px;
+    opacity: 1;
+    transition: opacity 0.3s, margin 0.3s;
 }
 nav a:hover {
     background-color: #f4f4f4;
-    color: black;
+    color: #e63946;
 }
 .content {
     flex: 1;
@@ -80,18 +85,12 @@ nav a:hover {
     justify-content: space-between;
     width: 100%;
 }
-.chart-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
 .card .card-text {
     display: flex;
     flex-direction: column;
     text-align: left;
 }
-.card .temperature,
-.card .humidity {
+.card .heart-rate {
     font-size: 1.5em;
     color: #e63946; /* Rojo */
 }
@@ -108,11 +107,18 @@ nav a:hover {
     background: linear-gradient(45deg, #e63946, #d62839); /* Degradado en hover */
     color: white;
 }
-.card:hover .card-text .temperature,
-.card:hover .card-text .humidity,
+.card:hover .card-text .heart-rate,
 .card:hover .card-text .description,
 .card:hover ion-icon {
     color: white;
+}
+.data-container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 20px;
+    width: 100%;
 }
 .table-container {
     color: #e63946;
@@ -120,9 +126,27 @@ nav a:hover {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    flex: 1;
+    min-width: 300px;
+    max-width: 45%;
 }
 .table-container h3 {
     font-size: 22px;
+    margin-bottom: 20px;
+}
+.chart-container {
+    color: #e63946;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    flex: 2;
+    min-width: 500px;
+    max-width: 55%;
+}
+.chart-container h3 {
+    font-size: 22px;
+    margin-bottom: 20px;
 }
 table {
     font-size: 15px;
@@ -140,39 +164,17 @@ th {
     border-color: transparent;
     text-align: left;
 }
-.data-container {
-    display: flex;
-    gap: 2rem;
-    margin-top: 2rem;
-    width: 100%;
-}
-.table-container {
-    flex: 1;
-    max-width: 45%;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-.chart-container {
-    flex: 1;
-    max-width: 55%;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
 @media (max-width: 768px) {
     .dashboard-container {
         display: flex;
+        font-family: Arial, sans-serif;
         margin: 0;
         background-color: #f4f4f4;
-        transition: all 0.3s ease-in-out; /* Transiciones suaves */
+        transition: all 0.3s ease-in-out;
     }
     nav:not(.sidebar-collapsed) {
         width: 450px;
     }
-
     .sidebar {
         width: 230px;
         color: white;
@@ -181,41 +183,31 @@ th {
         transition: all 0.3s ease-in-out;
         overflow: hidden;
     }
-    
-    /* Cuando el sidebar no está colapsado */
     .sidebar:not(.sidebar-collapsed) {
-        width: 100vw; /* Ocupa toda la pantalla */
-        position: absolute; /* Para que se superponga */
-        z-index: 10; /* Aparece por encima de otros elementos */
+        width: 100vw;
+        position: absolute;
+        z-index: 10;
     }
-
     .sidebar:is(.sidebar-collapsed) {
-        width: 9vw; /* Ocupa toda la pantalla */
-        z-index: 10; /* Aparece por encima de otros elementos */
+        width: 9vw;
+        z-index: 10;
         overflow: hidden;
         position: absolute;
     }
-
-    
-
     .card {
-        margin-left: 75px;
+        margin-left: 80px;
         max-width: 350px;
     }
-
-    .table-container {
-        margin-left: 75px;
-        max-width: 350px;
-        
-    }
-    
     .data-container {
         flex-direction: column;
+        align-items: center;
     }
-    
-    .table-container,
+    .table-container {
+        width: 100%;
+        max-width: 350px;
+    }
     .chart-container {
-        max-width: 100%;
-        margin-left: 0;
+        width: 100%;
+        max-width: 350px;
     }
 }
