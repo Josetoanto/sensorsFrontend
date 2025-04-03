@@ -10,6 +10,7 @@ export interface Client {
   password: string;
   age: number;
   backupEmail: string;
+  esp32Serial: string;
 }
 
 export interface LoginCredentials {
