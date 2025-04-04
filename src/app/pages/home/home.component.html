@@ -2,31 +2,31 @@
     <link href="https://unpkg.com/ionicons@5.5.2/dist/ionicons.css" rel="stylesheet">
     <div class="sidebar" [ngClass]="{'sidebar-collapsed': isCollapsed}">
         <button class="toggle-button" (click)="toggleSidebar()"> 
-            <ion-icon name="menu-outline"></ion-icon>
+            <i class="fas fa-bars"></i>
         </button>
         <nav>
             <a (click)="navigateToHome()">
-                <ion-icon name="home-outline"></ion-icon>
+                <i class="fas fa-home"></i>
                 <span class="link-text" *ngIf="!isCollapsed">Home</span>
             </a>
             <a (click)="navigateToAmbient()">
-                <ion-icon name="sunny-outline"></ion-icon>
+                <i class="fas fa-sun"></i>
                 <span class="link-text" *ngIf="!isCollapsed">Luz Ambiental</span>
             </a>
             <a (click)="navigateToHeartRate()">
-                <ion-icon name="heart-outline"></ion-icon>
+                <i class="fas fa-heart"></i>
                 <span class="link-text" *ngIf="!isCollapsed">Ritmo Cardíaco</span>
             </a>
             <a (click)="navigateToTemperature()">
-                <ion-icon name="thermometer-outline"></ion-icon>
+                <i class="fas fa-thermometer-half"></i>
                 <span class="link-text" *ngIf="!isCollapsed">Temperatura Corporal</span>
             </a>
             <a (click)="navigateToGyroscope()">
-                <ion-icon name="compass-outline"></ion-icon>
+                <i class="fas fa-compass"></i>
                 <span class="link-text" *ngIf="!isCollapsed">Giroscopio</span>
             </a>
             <a (click)="navigateToSettings()">
-                <ion-icon name="settings-outline"></ion-icon>
+                <i class="fas fa-cog"></i>
                 <span class="link-text" *ngIf="!isCollapsed">Configuración</span>
             </a>
         </nav>
@@ -43,7 +43,7 @@
                             {{ luzAmbiental > 500 ? 'Alta luminosidad' : (luzAmbiental < 100 ? 'Baja luminosidad' : 'Luminosidad normal') }}
                         </div>
                     </div>
-                    <ion-icon name="sunny-outline"></ion-icon>
+                    <i class="fas fa-sun"></i>
                 </div>
             </div>
             <div class="card heart-rate-card">
@@ -55,7 +55,7 @@
                             {{ ritmoCardiaco > 100 ? 'Ritmo elevado' : (ritmoCardiaco < 60 ? 'Ritmo bajo' : 'Ritmo normal') }}
                         </div>
                     </div>
-                    <ion-icon name="heart-outline"></ion-icon>
+                    <i class="fas fa-heart"></i>
                 </div>
             </div>
             <div class="card temperature-card">
@@ -67,7 +67,7 @@
                             {{ temperaturaCorporal > 37.5 ? 'Temperatura elevada' : (temperaturaCorporal < 36.5 ? 'Temperatura baja' : 'Temperatura normal') }}
                         </div>
                     </div>
-                    <ion-icon name="thermometer-outline"></ion-icon>
+                    <i class="fas fa-thermometer-half"></i>
                 </div>
             </div>
             <div class="card gyroscope-card">
@@ -79,7 +79,7 @@
                             {{ inclinacion > 30 ? 'Inclinación significativa' : (inclinacion < -30 ? 'Inclinación negativa significativa' : 'Inclinación normal') }}
                         </div>
                     </div>
-                    <ion-icon name="compass-outline"></ion-icon>
+                    <i class="fas fa-compass"></i>
                 </div>
             </div>
         </div>
