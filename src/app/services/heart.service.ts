@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { GmailService } from './gmail.service';
 
 // Interfaces para las respuestas
 export interface HeartRate {
@@ -28,7 +27,7 @@ export class HeartService {
   private HIGH_THRESHOLD = 100;
   private LOW_THRESHOLD = 60;
 
-  constructor(private http: HttpClient, private gmailService: GmailService) { }
+  constructor(private http: HttpClient) { }
 
   // Obtener todas las lecturas de ritmo cardíaco
   getAllHeartRates(userId: number): Observable<HeartRate[]> {
@@ -50,16 +49,6 @@ export class HeartService {
       `${this.baseUrl}api/sensor-heart-rate/heart-rate/average/${userId}`,
       { headers }
     ).toPromise();
-
-    if (response && (response.average_heart_rate > this.HIGH_THRESHOLD || response.average_heart_rate < this.LOW_THRESHOLD)) {
-      const backupEmail = sessionStorage.getItem('backupEmail');
-      if (backupEmail) {
-        const subject = 'Alerta de Ritmo Cardíaco';
-        const body = `Su ritmo cardíaco promedio es ${response.average_heart_rate}, que está fuera de los límites normales.`;
-        await this.gmailService.sendEmail(backupEmail, subject, body);
-      }
-    }
-
     return response;
   }
 

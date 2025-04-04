@@ -5,6 +5,8 @@
 /tmp
 /out-tsc
 /bazel-out
+src/app/services/gmail.service.ts
+
 
 # Node
 /node_modules
