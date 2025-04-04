@@ -9,7 +9,7 @@
     background: linear-gradient(45deg, #2a9d8f, #21867a); /* Degradado */
     color: white;
     padding: 20px;
-    height: 100vh;
+    height: auto;
     transition: width 0.3s;
     overflow: hidden; /* Para manejar contenido fuera de los límites al colapsar */
 
@@ -196,4 +196,34 @@ th {
 
     }
     
+}
+
+.info-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.posture-info {
+    background: white;
+    padding: 10px; /* Reducir el padding */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    margin-left: 20px; /* Espacio entre la tarjeta y la sección de postura */
+    width: 150px; /* Ancho fijo para que sea más pequeño */
+    text-align: center; /* Centrar el texto */
+}
+
+.posture-icon {
+    font-size: 1.5em; /* Tamaño del ícono */
+    color: #2a9d8f; /* Color del ícono */
+}
+
+.table-container {
+    color: #2a9d8f;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    flex: 1; /* Ocupa la mitad del espacio */
 }

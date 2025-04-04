@@ -35,16 +35,24 @@
         <div class="dashboard">
             <div class="card gyroscope-card">
                 <div class="card-content">
-
-                  <div class="card-text">
-                    <div class="inclination-value">
-                      {{ inclination ? inclination + '°' : 'Sin datos' }}
+                    <div class="card-text">
+                        <div class="inclination-value">
+                            {{ inclination ? inclination + '°' : 'Sin datos' }}
+                        </div>
+                        <div class="description">Inclinación Corporal</div>
                     </div>
-                    <div class="description">Inclinación Corporal</div>
-                  </div>
-                  <i class="fas fa-compass"></i>
+                    <i class="fas fa-compass"></i>
                 </div>
-              </div>
+            </div>
+
+            <!-- Nueva sección para información sobre la postura -->
+            <div class="card">
+                <p *ngIf="inclination <= 10">¡Buena postura! Mantén esta inclinación.</p>
+                <p *ngIf="inclination > 10"> ¡Postura no ideal! Considera ajustar tu posición.</p>
+                <div class="posture-icon">
+                    <i [ngClass]="{'fas fa-thumbs-up': inclination <= 10, 'fas fa-thumbs-down': inclination > 10}"></i>
+                </div>
+            </div>
         </div>
 
         <div class="table-container">
@@ -72,6 +80,17 @@
                     </tr>
                 </tbody>
             </table>
+            <div class="posture-effects">
+                <h3>Efectos de la Postura</h3>
+                <p>Una buena postura es esencial para la salud a largo plazo. Mantener una inclinación adecuada puede prevenir:</p>
+                <ul>
+                    <li>Dolor de espalda y cuello</li>
+                    <li>Fatiga muscular</li>
+                    <li>Problemas de circulación</li>
+                    <li>Estrés en las articulaciones</li>
+                </ul>
+                <p>Se recomienda realizar ejercicios de estiramiento y fortalecer los músculos de la espalda para mejorar la postura.</p>
+            </div>
         </div>
     </div>
 </div>
