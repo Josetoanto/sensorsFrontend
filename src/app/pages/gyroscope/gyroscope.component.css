@@ -9,7 +9,7 @@
     background: linear-gradient(45deg, #2a9d8f, #21867a); /* Degradado */
     color: white;
     padding: 20px;
-    height: auto;
+    height: 100vh;
     transition: width 0.3s;
     overflow: hidden; /* Para manejar contenido fuera de los límites al colapsar */
 
