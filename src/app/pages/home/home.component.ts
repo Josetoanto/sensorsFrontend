@@ -3,7 +3,7 @@ import { CommonModule, NgFor } from '@angular/common';
 import { Router } from '@angular/router';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { Subscription, timer } from 'rxjs';
-import { GyroscopeService } from '../../services/gyroscope.service';
+import { GyroscopeData, GyroscopeService } from '../../services/gyroscope.service';
 import { HeartService } from '../../services/heart.service';
 import { LightService } from '../../services/light.service';
 import { TemperatureService } from '../../services/temperature.service';
@@ -165,14 +165,12 @@ export class HomeComponent implements OnInit, OnDestroy {
     });
   }
 
-  private calculateInclination(data: any): number {
-    const tiltMagnitude = Math.sqrt(
-      Math.pow(data.giroX, 2) + 
-      Math.pow(data.giroY, 2) + 
-      Math.pow(data.giroZ, 2)
-    );
-    return Math.abs(Math.round(tiltMagnitude * 10) / 10);
-  }
+  public calculateInclination(data: GyroscopeData): number {
+    const angleRadians = Math.atan(data.giroY / data.giroZ); // Calcula el ángulo en radianes
+    const angleDegrees = angleRadians * (180 / Math.PI); // Convierte a grados
+    return Math.abs(Math.round(angleDegrees * 10) / 10); // Redondea a 1 decimal
+}
+
 
   private handleError(error: any): void {
     if (error.status === 401) {
