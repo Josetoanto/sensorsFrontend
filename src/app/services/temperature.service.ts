@@ -17,7 +17,7 @@ export interface AverageTemperatureResponse {
   providedIn: 'root'
 })
 export class TemperatureService {
-  private baseUrl = 'http://35.153.187.202:8080/';
+  private baseUrl = 'https://35.153.187.202:8080/';
 
   constructor(private http: HttpClient) { }
 

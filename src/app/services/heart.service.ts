@@ -23,7 +23,7 @@ export interface LatestHeartRate {
   providedIn: 'root'
 })
 export class HeartService {
-  private baseUrl = 'http://35.153.187.202:8080/';
+  private baseUrl = 'https://35.153.187.202:8080/';
   private HIGH_THRESHOLD = 100;
   private LOW_THRESHOLD = 60;
 
