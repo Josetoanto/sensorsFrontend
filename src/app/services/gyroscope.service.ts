@@ -16,7 +16,7 @@ export interface GyroscopeData {
   providedIn: 'root'
 })
 export class GyroscopeService {
-  private baseUrl = 'https://35.153.187.202:8080/api/sensor-gyroscope/';
+  private baseUrl = 'http://35.153.187.202:8080/api/sensor-gyroscope/';
 
   constructor(private http: HttpClient) { }
 
