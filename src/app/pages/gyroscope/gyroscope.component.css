@@ -12,8 +12,14 @@
     height: 100vh;
     transition: width 0.3s;
     overflow: hidden; /* Para manejar contenido fuera de los límites al colapsar */
-
 }
+
+.posture-text {
+    font-size: 1.2em;
+    color: #2a9d8f;
+    text-align: center;
+}
+
 .sidebar-collapsed {
     width: 50px;
 }

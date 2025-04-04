@@ -54,9 +54,9 @@
                         'fas fa-question-circle': inclination === null
                     }"></i>
                 </div>
-                <p *ngIf="inclination === null">Sin datos de inclinación.</p>
-                <p *ngIf="inclination !== null && inclination <= 10">¡Buena postura! Mantén esta inclinación.</p>
-                <p *ngIf="inclination !== null && inclination > 10">¡Postura no ideal! Considera ajustar tu posición.</p>
+                <p class="posture-text" *ngIf="inclination === null">Sin datos de inclinación.</p>
+                <p class="posture-text" *ngIf="inclination !== null && inclination <= 10">¡Buena postura! Mantén esta inclinación.</p>
+                <p class="posture-text" *ngIf="inclination !== null && inclination > 10">¡Postura no ideal! Considera ajustar tu posición.</p>
             </div>
         </div>
 
