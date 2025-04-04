@@ -33,7 +33,6 @@
     color: black; /* Color de texto azul oscuro */
 }
 nav a {
-    text-indent: 5px;
    display: flex;
     align-items: center;
     color: white;
@@ -45,9 +44,10 @@ nav a {
     overflow: hidden; /* Esconde cualquier contenido que exceda el ancho */
 
 }
-nav a i {
-    font-size: 1.3em;
+#thermometer-icon i {
+    margin-left: 2.5px; /* Espacio entre el icono y el texto */
 }
+
 nav a .link-text {
     margin-left: 10px;
 }

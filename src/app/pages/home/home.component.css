@@ -36,8 +36,6 @@
 }
 
 nav a {
-    text-indent: 5px;
-
     display: flex;
     align-items: center;
     color: white;
@@ -48,10 +46,14 @@ nav a {
     white-space: nowrap; /* Evitar que los textos se rompan */
     overflow: hidden; /* Esconde cualquier contenido que exceda el ancho */
 }
-nav a ion-icon {
-    font-size: 1.3em;
-    flex-shrink: 0; /* El icono nunca se colapsa */
+
+
+
+#thermometer-icon i {
+    margin-left: 2.5px; /* Espacio entre el icono y el texto */
 }
+
+
 nav a .link-text {
     margin-left: 10px;
     opacity: 1; /* Visibilidad total por defecto */

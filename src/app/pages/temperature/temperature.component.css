@@ -34,7 +34,6 @@
     color: #ffa600;
 }
 nav a {
-    text-indent: 5px;
     display: flex;
     align-items: center;
     color: white;
@@ -44,6 +43,10 @@ nav a {
     transition: background-color 0.3s, color 0.3s;
     white-space: nowrap; /* Evitar que los textos se rompan */
     overflow: hidden; /* Esconde cualquier contenido que exceda el ancho */
+}
+
+#thermometer-icon i {
+    margin-left: 2.5px; 
 }
 
 nav a .link-text {

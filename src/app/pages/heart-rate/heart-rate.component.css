@@ -34,7 +34,6 @@
     color: #e63946;
 }
 nav a {
-    text-indent: 5px;
     display: flex;
     align-items: center;
     color: white;
@@ -55,6 +54,11 @@ nav a:hover {
     background-color: #f4f4f4;
     color: #e63946;
 }
+
+#thermometer-icon i {
+    margin-left: 2.5px; /* Espacio entre el icono y el texto */
+}
+
 .content {
     flex: 1;
     padding: 20px;

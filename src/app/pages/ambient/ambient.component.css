@@ -35,7 +35,6 @@
     color: #251a72; /* Color de texto azul oscuro */
 }
 nav a {
-    text-indent: 5px;
    display: flex;
     align-items: center;
     color: white;
@@ -103,6 +102,11 @@ nav a:hover {
     color: #251a72;
     transition: color 0.3s;
 }
+
+#thermometer-icon i {
+    margin-left: 2.5px; /* Espacio entre el icono y el texto */
+}
+
 .card:hover {
     background-color: #251a72;
     color: white; /* Cambiar el color del texto al blanco */
