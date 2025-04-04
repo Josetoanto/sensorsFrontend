@@ -3,35 +3,34 @@
         <button class="toggle-button" (click)="toggleSidebar()"> 
             <i class="fas fa-bars"></i>
         </button>
-       <nav> 
-        <a (click)="navigateToHome()">
-            <i class="fas fa-home"></i>
-            <span class="link-text" *ngIf="!isCollapsed">Home</span>
-        </a>
-        <a (click)="navigateToAmbient()">
-            <i class="fas fa-sun"></i>
-            <span class="link-text" *ngIf="!isCollapsed">Luz Ambiental</span>
-        </a>
-        <a (click)="navigateToHeartRate()">
-            <i class="fas fa-heart"></i>
-            <span class="link-text" *ngIf="!isCollapsed">Ritmo Cardíaco</span>
-        </a>
-        <a id="thermometer-icon" (click)="navigateToTemperature()">
-            <i class="fas fa-thermometer-half"></i>
-            <span class="link-text" *ngIf="!isCollapsed">Temperatura Corporal</span>
-        </a>
-        <a (click)="navigateToGyroscope()">
-            <i class="fas fa-compass"></i>
-            <span class="link-text" *ngIf="!isCollapsed">Giroscopio</span>
-        </a>
-        <a (click)="navigateToSettings()">
-            <i class="fas fa-cog"></i>
-            <span class="link-text" *ngIf="!isCollapsed">Configuración</span>
-        </a>
+        <nav> 
+            <a (click)="navigateToHome()">
+                <i class="fas fa-home"></i>
+                <span class="link-text" *ngIf="!isCollapsed">Home</span>
+            </a>
+            <a (click)="navigateToAmbient()">
+                <i class="fas fa-sun"></i>
+                <span class="link-text" *ngIf="!isCollapsed">Luz Ambiental</span>
+            </a>
+            <a (click)="navigateToHeartRate()">
+                <i class="fas fa-heart"></i>
+                <span class="link-text" *ngIf="!isCollapsed">Ritmo Cardíaco</span>
+            </a>
+            <a id="thermometer-icon" (click)="navigateToTemperature()">
+                <i class="fas fa-thermometer-half"></i>
+                <span class="link-text" *ngIf="!isCollapsed">Temperatura Corporal</span>
+            </a>
+            <a (click)="navigateToGyroscope()">
+                <i class="fas fa-compass"></i>
+                <span class="link-text" *ngIf="!isCollapsed">Giroscopio</span>
+            </a>
+            <a (click)="navigateToSettings()">
+                <i class="fas fa-cog"></i>
+                <span class="link-text" *ngIf="!isCollapsed">Configuración</span>
+            </a>
         </nav>
-        
     </div>
-    <div>
+    <div class="content">
         <button class="logout-button" (click)="logout()">
             <span>Cerrar Sesión</span>
         </button>

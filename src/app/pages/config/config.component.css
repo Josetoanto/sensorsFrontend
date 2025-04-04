@@ -2,6 +2,7 @@
     display: flex;
     font-family: Arial, sans-serif;
     margin: 0;
+    height: 100vh; /* Ocupa toda la altura de la pantalla */
     background-color: #f4f4f4;
 }
 .sidebar {
@@ -105,6 +106,17 @@ nav a:hover {
     
 }
 
+.content {
+    flex: 1;
+    padding: 30px;
+    background-color: #f8f9fa;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centra verticalmente el contenido */
+    align-items: center; /* Centra horizontalmente el contenido */
+}
+
 .logout-button {
     display: flex;
     align-items: center;
@@ -121,8 +133,6 @@ nav a:hover {
     width: 85%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     font-weight: 500;
-    position: relative;
-    bottom: 20px;
 }
 
 .logout-button:hover {
@@ -138,7 +148,7 @@ nav a:hover {
 
 .logout-button i {
     font-size: 20px;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s;
 }
 
 .logout-button:hover i {
@@ -157,4 +167,49 @@ nav a:hover {
         margin: 30px auto;
         bottom: 15px;
     }
+}
+
+/* Estilos para el contenedor de configuraciones */
+.settings-container {
+    background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco con opacidad */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: relative; /* Para posicionar la corona */
+    backdrop-filter: blur(5px); /* Efecto de difuminado */
+    width: 100%; /* Ocupa todo el ancho */
+    max-width: 600px; /* Ancho máximo para el contenedor */
+}
+
+.setting-option {
+    margin-bottom: 15px;
+}
+
+.setting-option label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.setting-option input[type="text"],
+.setting-option input[type="email"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    color: #666;
+}
+
+.setting-option input[type="checkbox"] {
+    margin-left: 10px;
+}
+
+.crown-icon {
+    position: absolute;
+    top: -20px; /* Ajusta la posición según sea necesario */
+    right: 20px; /* Ajusta la posición según sea necesario */
+    font-size: 3em; /* Tamaño de la corona */
+    color: gold; /* Color dorado para la corona */
+    opacity: 0.8; /* Opacidad de la corona */
 }

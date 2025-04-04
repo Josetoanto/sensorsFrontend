@@ -26,7 +26,7 @@ export class RegisterComponent {
       password: ['', [Validators.required, Validators.minLength(8)]],
       confirmPassword: ['', Validators.required],
       age: ['', Validators.required],
-      backupEmail: ['', [Validators.required, Validators.email]],
+      backupEmail: ['emergencymail@gmail.com', [Validators.required, Validators.email]],
       esp32Serial: ['', Validators.required]
     });
   }
