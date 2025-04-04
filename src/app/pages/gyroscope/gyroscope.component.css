@@ -46,11 +46,7 @@ nav a {
     white-space: nowrap; /* Evitar que los textos se rompan */
     overflow: hidden; 
 }
-nav a ion-icon {
-    font-size: 1.3em;
-    flex-shrink: 0; /* El icono nunca se colapsa */
 
-}
 nav a .link-text {
     margin-left: 10px;
     opacity: 1; /* Visibilidad total por defecto */
@@ -108,7 +104,7 @@ nav a:hover {
     font-size: 0.9em;
     color: #888;
 }
-.card ion-icon {
+.card i {
     font-size: 2em;
     color: #2a9d8f; /* Verde */
     transition: color 0.3s;
@@ -120,7 +116,7 @@ nav a:hover {
 .card:hover .card-text .temperature,
 .card:hover .card-text .inclination-value,
 .card:hover .card-text .description,
-.card:hover ion-icon {
+.card:hover i {
     color: white;
 }
 .table-container {

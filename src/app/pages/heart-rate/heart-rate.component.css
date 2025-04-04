@@ -45,10 +45,7 @@ nav a {
     white-space: nowrap;
     overflow: hidden;
 }
-nav a ion-icon {
-    font-size: 1.3em;
-    flex-shrink: 0;
-}
+
 nav a .link-text {
     margin-left: 10px;
     opacity: 1;
@@ -98,7 +95,7 @@ nav a:hover {
     font-size: 0.9em;
     color: #888;
 }
-.card ion-icon {
+.card i {
     font-size: 2em;
     color: #e63946; /* Rojo */
     transition: color 0.3s;
@@ -109,7 +106,7 @@ nav a:hover {
 }
 .card:hover .card-text .heart-rate,
 .card:hover .card-text .description,
-.card:hover ion-icon {
+.card:hover i {
     color: white;
 }
 .data-container {

@@ -45,7 +45,7 @@ nav a {
     overflow: hidden; /* Esconde cualquier contenido que exceda el ancho */
 
 }
-nav a ion-icon {
+nav a i {
     font-size: 1.3em;
 }
 nav a .link-text {
@@ -136,12 +136,12 @@ nav a:hover {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.logout-button ion-icon {
+.logout-button i {
     font-size: 20px;
     transition: transform 0.3s ease;
 }
 
-.logout-button:hover ion-icon {
+.logout-button:hover i {
     transform: translateX(2px);
 }
 

@@ -98,7 +98,7 @@ nav a:hover {
     font-size: 0.9em;
     color: #888;
 }
-.card ion-icon {
+.card i {
     font-size: 2em;
     color: #251a72;
     transition: color 0.3s;
