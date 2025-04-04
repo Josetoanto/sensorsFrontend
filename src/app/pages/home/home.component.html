@@ -1,35 +1,47 @@
-<head>
-    <link href="https://unpkg.com/ionicons@5.5.2/dist/ionicons.css" rel="stylesheet">
-</head>
-
 <div class="dashboard-container">
     <div class="sidebar" [ngClass]="{'sidebar-collapsed': isCollapsed}">
         <button class="toggle-button" (click)="toggleSidebar()"> 
-            <ion-icon name="menu-outline"></ion-icon>
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="currentColor" class="icon icon-tabler icons-tabler-filled icon-tabler-user">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M12 2a5 5 0 1 1 -5 5l.005 -.217a5 5 0 0 1 4.995 -4.783z" />
+                <path d="M14 14a5 5 0 0 1 5 5v1a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-1a5 5 0 0 1 5 -5h4z" />
+            </svg>
         </button>
         <nav>
             <a (click)="navigateToHome()">
-                <ion-icon name="home-outline"></ion-icon>
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 3l9 9h-3v9h-12v-9h-3z"/>
+                </svg>
                 <span class="link-text" *ngIf="!isCollapsed">Home</span>
             </a>
             <a (click)="navigateToAmbient()">
-                <ion-icon name="sunny-outline"></ion-icon>
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2a10 10 0 1 1 -10 10 10 10 0 0 1 10 -10z"/>
+                </svg>
                 <span class="link-text" *ngIf="!isCollapsed">Luz Ambiental</span>
             </a>
             <a (click)="navigateToHeartRate()">
-                <ion-icon name="heart-outline"></ion-icon>
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c2.54 0 4.68 1.28 6 3.09C15.82 4.28 17.96 3 20.5 3 23.58 3 26 5.42 26 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                </svg>
                 <span class="link-text" *ngIf="!isCollapsed">Ritmo Cardíaco</span>
             </a>
             <a (click)="navigateToTemperature()">
-                <ion-icon name="thermometer-outline"></ion-icon>
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 1a2 2 0 0 1 2 2v10a2 2 0 0 1-4 0V3a2 2 0 0 1 2-2z"/>
+                </svg>
                 <span class="link-text" *ngIf="!isCollapsed">Temperatura Corporal</span>
             </a>
             <a (click)="navigateToGyroscope()">
-                <ion-icon name="compass-outline"></ion-icon>
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2a10 10 0 1 1 -10 10 10 10 0 0 1 10 -10z"/>
+                </svg>
                 <span class="link-text" *ngIf="!isCollapsed">Giroscopio</span>
             </a>
             <a (click)="navigateToSettings()">
-                <ion-icon name="settings-outline"></ion-icon>
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2a10 10 0 1 1 -10 10 10 10 0 0 1 10 -10z"/>
+                </svg>
                 <span class="link-text" *ngIf="!isCollapsed">Configuración</span>
             </a>
         </nav>
@@ -46,7 +58,9 @@
                             {{ luzAmbiental > 500 ? 'Alta luminosidad' : (luzAmbiental < 100 ? 'Baja luminosidad' : 'Luminosidad normal') }}
                         </div>
                     </div>
-                    <ion-icon name="sunny-outline"></ion-icon>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2a10 10 0 1 1 -10 10 10 10 0 0 1 10 -10z"/>
+                    </svg>
                 </div>
             </div>
             <div class="card heart-rate-card">
@@ -58,7 +72,9 @@
                             {{ ritmoCardiaco > 100 ? 'Ritmo elevado' : (ritmoCardiaco < 60 ? 'Ritmo bajo' : 'Ritmo normal') }}
                         </div>
                     </div>
-                    <ion-icon name="heart-outline"></ion-icon>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2a10 10 0 1 1 -10 10 10 10 0 0 1 10 -10z"/>
+                    </svg>
                 </div>
             </div>
             <div class="card temperature-card">
@@ -70,7 +86,9 @@
                             {{ temperaturaCorporal > 37.5 ? 'Temperatura elevada' : (temperaturaCorporal < 36.5 ? 'Temperatura baja' : 'Temperatura normal') }}
                         </div>
                     </div>
-                    <ion-icon name="thermometer-outline"></ion-icon>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2a10 10 0 1 1 -10 10 10 10 0 0 1 10 -10z"/>
+                    </svg>
                 </div>
             </div>
             <div class="card gyroscope-card">
@@ -82,7 +100,9 @@
                             {{ inclinacion > 30 ? 'Inclinación significativa' : (inclinacion < -30 ? 'Inclinación negativa significativa' : 'Inclinación normal') }}
                         </div>
                     </div>
-                    <ion-icon name="compass-outline"></ion-icon>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2a10 10 0 1 1 -10 10 10 10 0 0 1 10 -10z"/>
+                    </svg>
                 </div>
             </div>
         </div>
