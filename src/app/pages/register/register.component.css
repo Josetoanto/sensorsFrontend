@@ -1,5 +1,3 @@
-
-
 .form-container {
     display: flex;
     align-items: center;
@@ -127,7 +125,6 @@ legend {
     color: #0077ff;
 }
 
-
 @media (max-width: 768px) {
     
     .form-container{
@@ -139,4 +136,3 @@ legend {
         display: none;
     }
   }
-  

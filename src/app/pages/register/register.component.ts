@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ClientService } from '../../services/client.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-register',
@@ -38,12 +39,12 @@ export class RegisterComponent {
     const clientData = this.registerForm.value;
     this.clientService.createClient(clientData).subscribe({
       next: () => {
-        alert('Registro exitoso! Por favor inicia sesión.');
+        Swal.fire("Registro exitoso! Por favor inicia sesión.");
+      
         this.router.navigate(['/login']);
       },
       error: (error) => {
-        console.error('Error en registro:', error);
-        alert('Error en el registro. Inténtalo nuevamente.');
+        Swal.fire('Error en el registro. Inténtalo nuevamente.');
       }
     });
   }

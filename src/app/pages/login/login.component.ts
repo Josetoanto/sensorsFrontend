@@ -3,13 +3,14 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ClientService } from '../../services/client.service';
 import { NgIf } from '@angular/common';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
   standalone: true,
-  imports: [ReactiveFormsModule,NgIf]
+  imports: [ReactiveFormsModule, NgIf]
 })
 export class LoginComponent {
   loginForm: FormGroup;
@@ -17,7 +18,8 @@ export class LoginComponent {
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private clientService: ClientService
+    private clientService: ClientService,
+    
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -30,19 +32,30 @@ export class LoginComponent {
       const credentials = {
         email: this.loginForm.value.email,
         password: this.loginForm.value.password
-      };
-
+      } 
       this.clientService.login(credentials).subscribe({
-        next: () => {
-          this.router.navigate(['/home']); // Cambia la ruta según necesites
+        next: async (response) => {
+          sessionStorage.setItem('token', response.token);
+          if (response.userId) {
+            const user = await this.clientService.getClientById(response.userId).toPromise();
+            if (user) {
+              console.log('Usuario obtenido:', user);
+              sessionStorage.setItem('backupEmail', user.backupEmail);
+              this.router.navigate(['/home']); // Redirigir a home
+            }
+          }
         },
-        error: (error) => {
+        error: (error: any) => {
           console.error('Error en login:', error);
-          alert('Credenciales incorrectas. Por favor intenta nuevamente.');
+          Swal.fire('Por favor intenta nuevamente.');
         }
       });
+    } else {
+      Swal.fire('Por favor, ingrese un correo y contraseña válidos.');
     }
   }
+
+  
 
   navigateTo(route: string) {
     this.router.navigate([route]);

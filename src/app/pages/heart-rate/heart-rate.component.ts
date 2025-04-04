@@ -8,6 +8,7 @@ import { HeartService } from '../../services/heart.service';
 import { WebsocketService } from '../../services/websocket.service';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import Swal from 'sweetalert2';
+import { Howl } from 'howler';
 
 @Component({
   selector: 'app-heart-rate',
@@ -83,7 +84,6 @@ export class HeartRateComponent implements OnInit, OnDestroy {
         this.heartReadings = data.slice(-10).reverse();
         this.heartRateQueue = data.slice(-10).map(item => item.bpm);
         this.calculateAverage();
-        // Actualizar datos de la gráfica
         this.chartData = [{
           name: 'Ritmo Cardíaco',
           series: this.heartReadings.map(reading => ({
@@ -96,12 +96,18 @@ export class HeartRateComponent implements OnInit, OnDestroy {
     });
 
     // Obtener promedio
-    this.heartService.getAverageHeartRate(userId).subscribe({
-      next: (avg) => {
+    this.getAverageHeartRate(userId);
+  }
+
+  private async getAverageHeartRate(userId: number): Promise<void> {
+    try {
+      const avg = await this.heartService.getAverageHeartRate(userId);
+      if (avg) {
         this.averageHeartRate = avg.average_heart_rate;
-      },
-      error: (err) => console.error('Error getting average:', err)
-    });
+      }
+    } catch (err) {
+      console.error('Error getting average:', err);
+    }
   }
 
   private setupAutoRefresh(): void {
@@ -149,6 +155,11 @@ export class HeartRateComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (notification) => {
           console.log('Nueva notificación recibida:', notification);
+          const sonido = new Howl({
+            src: ['https://actions.google.com/sounds/v1/alarms/beep_short.ogg'],
+            volume: 5
+          });
+          sonido.play();
           if (notification.type === 'heart_rate') {
             this.heartRate = notification.value;
             this.updateQueue(notification.value);
@@ -157,7 +168,7 @@ export class HeartRateComponent implements OnInit, OnDestroy {
               title: 'Nueva lectura de frecuencia cardíaca',
               text: `${notification.value} bpm`,
               icon: 'info',
-              timer: 3000,
+              timer: 10000,
               showConfirmButton: false
             });
           } else {
@@ -165,7 +176,7 @@ export class HeartRateComponent implements OnInit, OnDestroy {
               title: 'Nueva notificación',
               text: notification.mensaje || JSON.stringify(notification),
               icon: 'info',
-              timer: 5000,
+              timer: 10000,
               showConfirmButton: false
             });
           }
@@ -176,7 +187,7 @@ export class HeartRateComponent implements OnInit, OnDestroy {
             title: 'Error',
             text: 'Error al recibir datos del WebSocket',
             icon: 'error',
-            timer: 3000,
+            timer: 10000,
             showConfirmButton: false
           });
         }

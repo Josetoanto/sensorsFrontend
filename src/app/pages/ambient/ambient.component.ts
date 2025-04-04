@@ -8,6 +8,7 @@ import { LightService } from '../../services/light.service';
 import { WebsocketService } from '../../services/websocket.service';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import Swal from 'sweetalert2';
+import { Howl } from 'howler';
 
 @Component({
   selector: 'app-ambient',
@@ -19,7 +20,7 @@ import Swal from 'sweetalert2';
 export class AmbientComponent implements OnInit, OnDestroy {
   luzAmbiental: number = 0;
   lightReadings: any[] = [];
-  lightQueue: number[] = [];  // Cola para los últimos 10 valores
+  lightQueue: number[] = []; 
   promedioLuz: number = 0;
   isCollapsed = true;
   private refreshSubscription!: Subscription;
@@ -50,6 +51,7 @@ export class AmbientComponent implements OnInit, OnDestroy {
     this.setupAutoRefresh();
     this.setupWebSocket();
     
+    
     const storedIsCollapsed = localStorage.getItem('isCollapsed');
     if (storedIsCollapsed) {
       this.isCollapsed = JSON.parse(storedIsCollapsed);
@@ -61,6 +63,12 @@ export class AmbientComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (notification) => {
           console.log('Nueva notificación recibida:', notification);
+          const sonido = new Howl({
+            src: ['https://actions.google.com/sounds/v1/alarms/beep_short.ogg'],
+            volume: 5
+          });
+          sonido.play();
+
           if (notification.type === 'light') {
             this.luzAmbiental = notification.value;
             this.updateQueue(notification.value);
@@ -69,7 +77,7 @@ export class AmbientComponent implements OnInit, OnDestroy {
               title: 'Nueva lectura de luz',
               text: `${notification.value} lx`,
               icon: 'info',
-              timer: 3000,
+              timer: 10000,
               showConfirmButton: false
             });
           } else {
@@ -77,7 +85,7 @@ export class AmbientComponent implements OnInit, OnDestroy {
               title: 'Nueva notificación',
               text: notification.mensaje || JSON.stringify(notification),
               icon: 'info',
-              timer: 5000,
+              timer: 10000,
               showConfirmButton: false
             });
           }

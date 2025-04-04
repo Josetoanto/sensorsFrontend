@@ -9,6 +9,8 @@ import { LightService } from '../../services/light.service';
 import { TemperatureService } from '../../services/temperature.service';
 import { WebsocketService } from '../../services/websocket.service';
 import Swal from 'sweetalert2';
+import { ClientService } from '../../services/client.service';  4
+import { Howl } from 'howler';
 
 @Component({
   selector: 'app-home',
@@ -25,6 +27,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   isCollapsed = true;
   private refreshSubscription!: Subscription;
   private websocketSubscription!: Subscription;
+  
 
   constructor(
     private router: Router,
@@ -32,7 +35,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     private heartService: HeartService,
     private lightService: LightService,
     private temperatureService: TemperatureService,
-    private websocketService: WebsocketService
+    private websocketService: WebsocketService,
+    private clientService: ClientService
   ) {}
 
   ngOnInit(): void {
@@ -40,7 +44,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.initData();
     this.setupAutoRefresh();
     this.setupWebSocket();
-    
+    Notification.requestPermission()
     const storedIsCollapsed = localStorage.getItem('isCollapsed');
     if (storedIsCollapsed) {
       this.isCollapsed = JSON.parse(storedIsCollapsed);
@@ -66,6 +70,14 @@ export class HomeComponent implements OnInit, OnDestroy {
   private initData(): void {
     const userId = Number(sessionStorage.getItem('userId'));
     this.fetchAllSensorData(userId);
+    Notification.requestPermission().then(permission => {
+      if (permission === 'granted') {
+        new Notification('¡Hola!', {
+          body: 'Bienvenido a nuestra aplicación',
+          icon: 'assets/favicon.ico'
+        });
+      }
+    });
   }
 
   private setupAutoRefresh(): void {
@@ -81,21 +93,26 @@ export class HomeComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (notification) => {
           console.log('Nueva notificación recibida:', notification);
+          const sonido = new Howl({
+            src: ['https://actions.google.com/sounds/v1/alarms/beep_short.ogg'],
+            volume: 5
+          });
+          sonido.play();
           Swal.fire({
             title: 'Nueva notificación',
             text: notification.mensaje || JSON.stringify(notification),
             icon: 'info',
-            timer: 5000,
+            timer: 10000,
             showConfirmButton: false
-          });
+          })
         },
         error: (error) => {
-          console.error('Error en WebSocket:', error);
+          console.error('error en WebSocket:', error);
           Swal.fire({
             title: 'Error',
             text: 'Error al recibir datos del WebSocket',
             icon: 'error',
-            timer: 3000,
+            timer: 10000,
             showConfirmButton: false
           });
         }
@@ -195,4 +212,5 @@ export class HomeComponent implements OnInit, OnDestroy {
   navigateToSettings() {
     this.router.navigate(['/settings']);
   }
+
 }

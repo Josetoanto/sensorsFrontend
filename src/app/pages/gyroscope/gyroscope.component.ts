@@ -7,6 +7,7 @@ import { GyroscopeService, GyroscopeData } from '../../services/gyroscope.servic
 import { WebsocketService } from '../../services/websocket.service';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import Swal from 'sweetalert2';
+import { Howl } from 'howler';
 
 @Component({
   selector: 'app-gyroscope',
@@ -15,6 +16,7 @@ import Swal from 'sweetalert2';
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   styleUrl: './gyroscope.component.css'
 })
+
 export class GyroscopeComponent implements OnInit, OnDestroy {
   inclination: number = 0; // Inclinación en grados
   inclinationHistory: number[] = [];
@@ -112,13 +114,11 @@ export class GyroscopeComponent implements OnInit, OnDestroy {
   }
 
   public calculateInclination(data: GyroscopeData): number {
-    const tiltMagnitude = Math.sqrt(
-      Math.pow(data.giroX, 2) + 
-      Math.pow(data.giroY, 2) + 
-      Math.pow(data.giroZ, 2)
-    );
-    return Math.abs(Math.round(tiltMagnitude * 10) / 10);
-  }
+    const angleRadians = Math.atan(data.giroY / data.giroZ); // Calcula el ángulo en radianes
+    const angleDegrees = angleRadians * (180 / Math.PI); // Convierte a grados
+    return Math.abs(Math.round(angleDegrees * 10) / 10); // Redondea a 1 decimal
+}
+
 
   trackBySensorData(index: number, item: GyroscopeData): number {
     return item.id;
@@ -146,6 +146,11 @@ export class GyroscopeComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (notification) => {
           console.log('Nueva notificación recibida:', notification);
+          const sonido = new Howl({
+            src: ['https://actions.google.com/sounds/v1/alarms/beep_short.ogg'],
+            volume: 5
+          });
+          sonido.play();
           if (notification.type === 'gyroscope') {
             this.gyroscopeData = notification.value;
             this.updateReadings(notification.value);
@@ -153,7 +158,7 @@ export class GyroscopeComponent implements OnInit, OnDestroy {
               title: 'Nueva lectura del giroscopio',
               html: `X: ${notification.value.x}<br>Y: ${notification.value.y}<br>Z: ${notification.value.z}`,
               icon: 'info',
-              timer: 3000,
+              timer: 10000,
               showConfirmButton: false
             });
           } else {
@@ -161,7 +166,7 @@ export class GyroscopeComponent implements OnInit, OnDestroy {
               title: 'Nueva notificación',
               text: notification.mensaje || JSON.stringify(notification),
               icon: 'info',
-              timer: 5000,
+              timer: 10000,
               showConfirmButton: false
             });
           }
@@ -172,7 +177,7 @@ export class GyroscopeComponent implements OnInit, OnDestroy {
             title: 'Error',
             text: 'Error al recibir datos del WebSocket',
             icon: 'error',
-            timer: 3000,
+            timer: 10000,
             showConfirmButton: false
           });
         }

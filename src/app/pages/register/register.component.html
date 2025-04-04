@@ -36,8 +36,10 @@
             <input type="text" id="esp32Serial" formControlName="esp32Serial" placeholder="Ingresa el Serial ESP32">
 
             <button type="button" (click)="onSubmit()">Registrarse</button>
+
+        <a (click)="navigateTo('/login')">¿Ya tienes una cuenta? Haz clic aquí.</a>
+
         </fieldset>
     </form>
     
-    <a (click)="navigateTo('/login')">¿Ya tienes una cuenta? Haz clic aquí.</a>
 </div>
