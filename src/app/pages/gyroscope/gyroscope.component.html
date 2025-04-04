@@ -47,11 +47,16 @@
 
             <!-- Nueva sección para información sobre la postura -->
             <div class="card">
-                <p *ngIf="inclination <= 10">¡Buena postura! Mantén esta inclinación.</p>
-                <p *ngIf="inclination > 10"> ¡Postura no ideal! Considera ajustar tu posición.</p>
                 <div class="posture-icon">
-                    <i [ngClass]="{'fas fa-thumbs-up': inclination <= 10, 'fas fa-thumbs-down': inclination > 10}"></i>
+                    <i [ngClass]="{
+                        'fas fa-thumbs-up': inclination !== null && inclination <= 10,
+                        'fas fa-thumbs-down': inclination !== null && inclination > 10,
+                        'fas fa-question-circle': inclination === null
+                    }"></i>
                 </div>
+                <p *ngIf="inclination === null">Sin datos de inclinación.</p>
+                <p *ngIf="inclination !== null && inclination <= 10">¡Buena postura! Mantén esta inclinación.</p>
+                <p *ngIf="inclination !== null && inclination > 10">¡Postura no ideal! Considera ajustar tu posición.</p>
             </div>
         </div>
 

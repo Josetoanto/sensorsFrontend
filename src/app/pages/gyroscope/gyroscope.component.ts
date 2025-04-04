@@ -18,7 +18,7 @@ import { Howl } from 'howler';
 })
 
 export class GyroscopeComponent implements OnInit, OnDestroy {
-  inclination: number = 0; // Inclinación en grados
+  inclination: number | null = null
   inclinationHistory: number[] = [];
   sensorDataHistory: GyroscopeData[] = [];
   gyroscopeData: any = { x: 0, y: 0, z: 0 };
