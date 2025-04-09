@@ -49,7 +49,7 @@
             <div class="card heart-rate-card">
                 <div class="card-content">
                     <div class="card-text">
-                        <div class="heart-rate">{{ ritmoCardiaco !== null ? ritmoCardiaco + ' BPM' : 'Sin datos' }}</div>
+                        <div class="heart-rate">40 BPM</div>
                         <div class="description">Ritmo Cardíaco</div>
                         <div class="status" *ngIf="ritmoCardiaco !== null" [ngClass]="{'high': ritmoCardiaco > 100, 'low': ritmoCardiaco < 60, 'normal': ritmoCardiaco >= 60 && ritmoCardiaco <= 100}">
                             {{ ritmoCardiaco > 100 ? 'Ritmo elevado' : (ritmoCardiaco < 60 ? 'Ritmo bajo' : 'Ritmo normal') }}

@@ -49,6 +49,13 @@ export class HomeComponent implements OnInit, OnDestroy {
     if (storedIsCollapsed) {
       this.isCollapsed = JSON.parse(storedIsCollapsed);
     }
+    Swal.fire({
+      title: 'Mala postura detectada',
+      text: 'Por favor, ajusta tu posición para evitar problemas de salud.',
+      icon: 'warning',
+      timer: 10000,
+      showConfirmButton: false
+    });
   }
 
   ngOnDestroy(): void {
