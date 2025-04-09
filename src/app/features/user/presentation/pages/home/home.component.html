@@ -1,0 +1,87 @@
+<div class="dashboard-container">
+    <link href="https://unpkg.com/ionicons@5.5.2/dist/ionicons.css" rel="stylesheet">
+    <div class="sidebar" [ngClass]="{'sidebar-collapsed': isCollapsed}">
+        <button class="toggle-button" (click)="toggleSidebar()"> 
+            <i class="fas fa-bars"></i>
+        </button>
+        <nav>
+            <a (click)="navigateToHome()">
+                <i class="fas fa-home"></i>
+                <span class="link-text" *ngIf="!isCollapsed">Home</span>
+            </a>
+            <a (click)="navigateToAmbient()">
+                <i class="fas fa-sun"></i>
+                <span class="link-text" *ngIf="!isCollapsed">Luz Ambiental</span>
+            </a>
+            <a (click)="navigateToHeartRate()">
+                <i class="fas fa-heart"></i>
+                <span class="link-text" *ngIf="!isCollapsed">Ritmo Cardíaco</span>
+            </a>
+            <a id="thermometer-icon" (click)="navigateToTemperature()">
+                <i class="fas fa-thermometer-half"></i>
+                <span class="link-text" *ngIf="!isCollapsed">Temperatura Corporal</span>
+            </a>
+            <a (click)="navigateToGyroscope()">
+                <i class="fas fa-compass"></i>
+                <span class="link-text" *ngIf="!isCollapsed">Giroscopio</span>
+            </a>
+            <a (click)="navigateToSettings()">
+                <i class="fas fa-cog"></i>
+                <span class="link-text" *ngIf="!isCollapsed">Configuración</span>
+            </a>
+        </nav>
+    </div>
+
+    <div class="content">
+        <div class="dashboard">
+            <div class="card light-card">
+                <div class="card-content">
+                    <div class="card-text">
+                        <div class="light">{{ luzAmbiental ? luzAmbiental + ' lx' : 'Sin datos' }}</div>
+                        <div class="description">Luz Ambiental</div>
+                        <div class="status" *ngIf="luzAmbiental !== null" [ngClass]="{'high': luzAmbiental > 500, 'low': luzAmbiental < 100, 'normal': luzAmbiental >= 100 && luzAmbiental <= 500}">
+                            {{ luzAmbiental > 500 ? 'Alta luminosidad' : (luzAmbiental < 100 ? 'Baja luminosidad' : 'Luminosidad normal') }}
+                        </div>
+                    </div>
+                    <i class="fas fa-sun"></i>
+                </div>
+            </div>
+            <div class="card heart-rate-card">
+                <div class="card-content">
+                    <div class="card-text">
+                        <div class="heart-rate">{{ ritmoCardiaco ? ritmoCardiaco + ' BPM' : 'Sin datos' }}</div>
+                        <div class="description">Ritmo Cardíaco</div>
+                        <div class="status" *ngIf="ritmoCardiaco !== null" [ngClass]="{'high': ritmoCardiaco > 100, 'low': ritmoCardiaco < 60, 'normal': ritmoCardiaco >= 60 && ritmoCardiaco <= 100}">
+                            {{ ritmoCardiaco > 100 ? 'Ritmo elevado' : (ritmoCardiaco < 60 ? 'Ritmo bajo' : 'Ritmo normal') }}
+                        </div>
+                    </div>
+                    <i class="fas fa-heart"></i>
+                </div>
+            </div>
+            <div class="card temperature-card">
+                <div class="card-content">
+                    <div class="card-text">
+                        <div class="temperature">{{ temperaturaCorporal ? temperaturaCorporal + ' °C' : 'Sin datos' }}</div>
+                        <div class="description">Temperatura Corporal</div>
+                        <div class="status" *ngIf="temperaturaCorporal !== null" [ngClass]="{'high': temperaturaCorporal > 37.5, 'low': temperaturaCorporal < 36.5, 'normal': temperaturaCorporal >= 36.5 && temperaturaCorporal <= 37.5}">
+                            {{ temperaturaCorporal > 37.5 ? 'Temperatura elevada' : (temperaturaCorporal < 36.5 ? 'Temperatura baja' : 'Temperatura normal') }}
+                        </div>
+                    </div>
+                    <i class="fas fa-thermometer-half"></i>
+                </div>
+            </div>
+            <div class="card gyroscope-card">
+                <div class="card-content">
+                    <div class="card-text">
+                        <div class="gyroscope">{{ inclinacion ? inclinacion + ' °' : 'Sin datos' }}</div>
+                        <div class="description">Giroscopio</div>
+                        <div class="status" *ngIf="inclinacion !== null" [ngClass]="{'high': inclinacion > 30, 'low': inclinacion < -30, 'normal': inclinacion >= -30 && inclinacion <= 30}">
+                            {{ inclinacion > 30 ? 'Inclinación significativa' : (inclinacion < -30 ? 'Inclinación negativa significativa' : 'Inclinación normal') }}
+                        </div>
+                    </div>
+                    <i class="fas fa-compass"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

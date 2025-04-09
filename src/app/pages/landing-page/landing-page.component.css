@@ -1,0 +1,183 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@300;400;500&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+.welldesk-container {
+    width: 100%;
+    text-align: center;
+}
+
+.hero {
+    background: linear-gradient(135deg, #1576d9 0%, #0077ff 50%, #00d4ff 100%);
+    color: white;
+    padding: 80px 20px;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.hero h1 {
+    font-size: 4rem;
+    font-weight: 700;
+}
+
+.hero h3 {
+    font-size: 1.8rem;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.hero button {
+    background: white;
+    color: #0077ff;
+    border: 2px solid white;
+    padding: 12px 20px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border-radius: 8px;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.hero button:hover {
+    background: #0077ff;
+    color: white;
+    border: 2px solid white;
+    transform: scale(1.05);
+}
+
+.hero button:active {
+    background: #005bb5;
+    color: white;
+    border: 2px solid white;
+    transform: scale(0.98);
+}
+
+.features, .benefits, .importance, .cta {
+    padding: 60px 15%;
+}
+
+.features h2, .benefits h2, .importance h2, .cta h2 {
+    font-size: 2.5rem;
+    color: #1576d9;
+    margin-bottom: 20px;
+}
+
+.features ul, .benefits ul {
+    list-style: none;
+    text-align: left;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.features li, .benefits li {
+    margin-left: 12%;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    padding-left: 25px;
+    position: relative;
+}
+
+.features li::before, .benefits li::before {
+    content: "✔";
+    color: #0077ff;
+    font-size: 1.5rem;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    top: 2px;
+}
+
+.importance {
+    background: linear-gradient(135deg, #1576d9 0%, #0077ff 50%, #00d4ff 100%);
+    padding: 60px 15%;
+}
+
+.importance dl {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.importance dt {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: white;
+    margin-top: 15px;
+}
+
+.importance dd {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    color: whitesmoke;
+}
+
+.importance h2 {
+    color: white;
+}
+
+.cta {
+    background: white;
+    color: #0077ff;
+    padding: 60px 15%;
+}
+
+.cta p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.cta button {
+    background: #0077ff;
+    color: white;
+    border: 2px solid #0077ff;
+    padding: 12px 20px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.cta button:hover {
+    background: white;
+    color: #0077ff;
+    border: 2px solid #0077ff;
+    transform: scale(1.05);
+}
+
+.cta button:active {
+    background: #005bb5;
+    color: white;
+    border: 2px solid #005bb5;
+    transform: scale(0.98);
+}
+
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 3rem;
+    }
+
+    .hero h3 {
+        font-size: 1.5rem;
+    }
+
+    .features, .benefits, .importance, .cta {
+        padding: 40px 10%;
+    }
+}

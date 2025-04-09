@@ -1,0 +1,287 @@
+.dashboard-container {
+    display: flex;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f4f4f4;
+}
+.sidebar {
+    width: 230px;
+    background-color: #251a72;
+    color: white;
+    padding: 20px;
+    height: 100vh;
+    transition: width 0.3s;
+}
+.sidebar-collapsed {
+    width: 50px;
+}
+
+
+.toggle-button {
+   background: none;
+    border: none;
+    color: white;
+    font-size: 1.3em;
+    cursor: pointer;
+    margin-bottom: 20px;
+    margin-left: 15px;
+    padding: 15px;
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 5px;
+    margin: 5px 0;
+}
+.toggle-button:hover {
+    background-color: #f4f4f4; /* Color de fondo blanco */
+    color: #251a72; /* Color de texto azul oscuro */
+}
+nav a {
+   display: flex;
+    align-items: center;
+    color: white;
+    text-decoration: none;
+    padding: 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+    white-space: nowrap; /* Evitar que los textos se rompan */
+    overflow: hidden; /* Esconde cualquier contenido que exceda el ancho */
+
+}
+nav a ion-icon {
+    font-size: 1.3em;
+}
+nav a .link-text {
+    margin-left: 10px;
+}
+nav a:hover {
+    background-color: #f4f4f4; /* Color de fondo blanco */
+    color: #251a72; /* Color de texto azul oscuro */
+}
+.content {
+    flex: 1;
+    padding: 20px;
+}
+.dashboard {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.card {
+    background: white;
+    padding: 20px;
+    text-align: center;
+    width: 555px;
+    height: 80px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.card-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.card .card-text {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+.card .light {
+    font-size: 1.5em;
+    color: #251a72;
+}
+.card .description {
+    font-size: 0.9em;
+    color: #888;
+}
+.card i {
+    font-size: 2em;
+    color: #251a72;
+    transition: color 0.3s;
+}
+
+#thermometer-icon i {
+    margin-left: 2.5px; /* Espacio entre el icono y el texto */
+}
+
+.card:hover {
+    background-color: #251a72;
+    color: white; /* Cambiar el color del texto al blanco */
+}
+.card:hover .card-text .light,
+.card:hover .card-text .description,
+.card:hover ion-icon {
+    color: white; /* Cambiar el color del icono y del texto al blanco */
+}
+.data-container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.table-container {
+    color: #251a72;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    flex: 1;
+    min-width: 300px;
+    max-width: 45%;
+}
+
+.table-container h3 {
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.chart-container {
+    color: #251a72;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    flex: 2;
+    min-width: 500px;
+    max-width: 55%;
+}
+
+.chart-container h3 {
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+table {
+    font-size: 15px;
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 50px;
+}
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+th {
+    color: black;
+    border-color: transparent;
+    text-align: left; 
+}
+
+.lighting-info {
+    margin-top: 15px;
+    padding: 10px;
+}
+
+.lighting-info h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #251a72;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.info-card {
+    background: white;
+    padding: 8px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 12px;
+}
+
+.info-card h4 {
+    margin: 0 0 5px 0;
+    color: #251a72;
+}
+
+.info-card p {
+    margin: 2px 0;
+    color: #666;
+}
+
+.low-light {
+    border-left: 3px solid #2196f3;
+}
+
+.optimal-light {
+    border-left: 3px solid #4caf50;
+}
+
+.high-light {
+    border-left: 3px solid #f44336;
+}
+
+@media (max-width: 768px) {
+    .dashboard-container {
+        display: flex;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        background-color: #f4f4f4;
+        transition: all 0.3s ease-in-out; /* Transiciones suaves */
+    }
+
+    nav:not(.sidebar-collapsed) {
+        width: 450px;
+    }
+
+    .sidebar {
+        width: 230px;
+        color: white;
+        padding: 20px;
+        height: 100vh;
+        transition: all 0.3s ease-in-out;
+        overflow: hidden;
+    }
+    
+    /* Cuando el sidebar no está colapsado */
+    .sidebar:not(.sidebar-collapsed) {
+        width: 100vw; /* Ocupa toda la pantalla */
+        position: absolute; /* Para que se superponga */
+        z-index: 10; /* Aparece por encima de otros elementos */
+    }
+
+    .sidebar:is(.sidebar-collapsed) {
+        width: 9vw; /* Ocupa toda la pantalla */
+        z-index: 10; /* Aparece por encima de otros elementos */
+        overflow: hidden;
+        position: absolute;
+    }
+
+    .card {
+        margin-left: 80px;
+        max-width: 350px;
+    }
+
+    .data-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .table-container {
+        width: 100%;
+        max-width: 350px;
+    }
+    
+    .chart-container {
+        width: 100%;
+        max-width: 350px;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .info-card {
+        margin-bottom: 5px;
+    }
+}

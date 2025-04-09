@@ -1,0 +1,235 @@
+.dashboard-container {
+    display: flex;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f4f4f4;
+}
+.sidebar {
+    width: 230px;
+    background: linear-gradient(45deg, #2a9d8f, #21867a); /* Degradado */
+    color: white;
+    padding: 20px;
+    height: 100vh;
+    transition: width 0.3s;
+    overflow: hidden; /* Para manejar contenido fuera de los límites al colapsar */
+}
+
+.posture-text {
+    font-size: 1.2em;
+    color: #2a9d8f;
+    text-align: center;
+}
+
+.sidebar-collapsed {
+    width: 50px;
+}
+.toggle-button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.3em;
+    cursor: pointer;
+    margin-bottom: 20px;
+    margin-left: 15px;
+    padding: 15px;
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 5px;
+    margin: 5px 0;
+}
+.toggle-button:hover {
+    background-color: #f4f4f4;
+    color: #2a9d8f;
+}
+nav a {
+    display: flex;
+    align-items: center;
+    color: white;
+    text-decoration: none;
+    padding: 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+    white-space: nowrap; /* Evitar que los textos se rompan */
+    overflow: hidden; 
+}
+
+#thermometer-icon i {
+    margin-left: 2.5px; /* Espacio entre el icono y el texto */
+}
+
+nav a .link-text {
+    margin-left: 10px;
+    opacity: 1; /* Visibilidad total por defecto */
+    transition: opacity 0.3s, margin 0.3s;
+}
+
+nav a:hover {
+    background-color: #f4f4f4;
+    color: black;
+}
+.content {
+    flex: 1;
+    padding: 20px;
+}
+.dashboard {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.card {
+    background: white;
+    padding: 20px;
+    text-align: center;
+    width: 555px;
+    height: 80px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background-color 0.3s;
+}
+.card-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+.chart-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+.card .card-text {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+.card .temperature,
+.card .inclination-value {
+    font-size: 1.5em;
+    color: #2a9d8f; /* Verde */
+}
+.card .description {
+    font-size: 0.9em;
+    color: #888;
+}
+.card i {
+    font-size: 2em;
+    color: #2a9d8f; /* Verde */
+    transition: color 0.3s;
+}
+.card:hover {
+    background: linear-gradient(45deg, #2a9d8f, #21867a); /* Degradado en hover */
+    color: white;
+}
+.card:hover .card-text .temperature,
+.card:hover .card-text .inclination-value,
+.card:hover .card-text .description,
+.card:hover i {
+    color: white;
+}
+.table-container {
+    color: #2a9d8f;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+.table-container h3 {
+    font-size: 22px;
+}
+table {
+    font-size: 15px;
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 50px;
+}
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+th {
+    color: black;
+    border-color: transparent;
+    text-align: left;
+}
+@media (max-width: 768px) {
+    .dashboard-container {
+        display: flex;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        background-color: #f4f4f4;
+        transition: all 0.3s ease-in-out; /* Transiciones suaves */
+    }
+
+    nav:not(.sidebar-collapsed) {
+        width: 450px;
+    }
+    
+    .sidebar {
+        width: 230px;
+        background: linear-gradient(45deg, #2a9d8f, #21867a); /* Degradado */
+        color: white;
+        padding: 20px;
+        height: 100vh;
+        transition: all 0.3s ease-in-out;
+        overflow: hidden;
+    }
+    
+    /* Cuando el sidebar no está colapsado */
+    .sidebar:not(.sidebar-collapsed) {
+        width: 100vw; /* Ocupa toda la pantalla */
+        position: absolute; /* Para que se superponga */
+        z-index: 10; /* Aparece por encima de otros elementos */
+    }
+
+    .sidebar:is(.sidebar-collapsed) {
+        width: 9vw; /* Ocupa toda la pantalla */
+        z-index: 10; /* Aparece por encima de otros elementos */
+        overflow: hidden;
+        position: absolute;
+    }
+
+    .card {
+        margin-left: 75px;
+        max-width: 350px;
+    }
+
+    .table-container {
+        margin-left: 75px;
+        max-width: max-content;
+
+    }
+    
+}
+
+.info-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.posture-info {
+    background: white;
+    padding: 10px; /* Reducir el padding */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    margin-left: 20px; /* Espacio entre la tarjeta y la sección de postura */
+    width: 150px; /* Ancho fijo para que sea más pequeño */
+    text-align: center; /* Centrar el texto */
+}
+
+.posture-icon {
+    font-size: 1.5em; /* Tamaño del ícono */
+    color: #2a9d8f; /* Color del ícono */
+}
+
+.table-container {
+    color: #2a9d8f;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    flex: 1; /* Ocupa la mitad del espacio */
+}

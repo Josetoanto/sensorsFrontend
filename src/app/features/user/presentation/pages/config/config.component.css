@@ -1,0 +1,215 @@
+.dashboard-container {
+    display: flex;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    height: 100vh; /* Ocupa toda la altura de la pantalla */
+    background-color: #f4f4f4;
+}
+.sidebar {
+    width: 230px;
+    background-color: gray;
+    color: white;
+    padding: 20px;
+    height: 100vh;
+    transition: width 0.3s;
+}
+.sidebar-collapsed {
+    width: 50px;
+}
+.toggle-button {
+   background: none;
+    border: none;
+    color: white;
+    font-size: 1.3em;
+    cursor: pointer;
+    margin-bottom: 20px;
+    margin-left: 15px;
+    padding: 15px;
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 5px;
+    margin: 5px 0;
+}
+.toggle-button:hover {
+    background-color: #f4f4f4; /* Color de fondo blanco */
+    color: black; /* Color de texto azul oscuro */
+}
+nav a {
+   display: flex;
+    align-items: center;
+    color: white;
+    text-decoration: none;
+    padding: 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+    white-space: nowrap; /* Evitar que los textos se rompan */
+    overflow: hidden; /* Esconde cualquier contenido que exceda el ancho */
+
+}
+#thermometer-icon i {
+    margin-left: 2.5px; /* Espacio entre el icono y el texto */
+}
+
+nav a .link-text {
+    margin-left: 10px;
+}
+nav a:hover {
+    background-color: #f4f4f4; /* Color de fondo blanco */
+    color: black; /* Color de texto azul oscuro */
+}
+
+@media (max-width: 768px) {
+    .dashboard-container {
+        display: flex;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        background-color: #f4f4f4;
+        transition: all 0.3s ease-in-out; /* Transiciones suaves */
+    }
+
+    nav:not(.sidebar-collapsed) {
+        width: 450px;
+    }
+
+    .sidebar {
+        width: 230px;
+        color: white;
+        padding: 20px;
+        height: 100vh;
+        transition: all 0.3s ease-in-out;
+        overflow: hidden;
+    }
+    
+    /* Cuando el sidebar no está colapsado */
+    .sidebar:not(.sidebar-collapsed) {
+        width: 100vw; /* Ocupa toda la pantalla */
+        position: absolute; /* Para que se superponga */
+        z-index: 10; /* Aparece por encima de otros elementos */
+    }
+
+    .sidebar:is(.sidebar-collapsed) {
+        width: 9vw; /* Ocupa toda la pantalla */
+        z-index: 10; /* Aparece por encima de otros elementos */
+        overflow: hidden;
+        position: absolute;
+    }
+
+    .card {
+        margin-left: 80px;
+        max-width: 350px;
+    }
+
+    .table-container {
+        margin-left: 80px;
+        max-width: 350px;
+
+    }
+    
+}
+
+.content {
+    flex: 1;
+    padding: 30px;
+    background-color: #f8f9fa;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centra verticalmente el contenido */
+    align-items: center; /* Centra horizontalmente el contenido */
+}
+
+.logout-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 15px 30px;
+    background-color: gray;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 40px auto;
+    width: 85%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-weight: 500;
+}
+
+.logout-button:hover {
+    background-color: #333333;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.logout-button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logout-button i {
+    font-size: 20px;
+    transition: transform 0.3s;
+}
+
+.logout-button:hover i {
+    transform: translateX(2px);
+}
+
+.logout-button span {
+    font-size: 15px;
+    letter-spacing: 0.5px;
+}
+
+@media (max-width: 768px) {
+    .logout-button {
+        width: 80%;
+        padding: 12px 24px;
+        margin: 30px auto;
+        bottom: 15px;
+    }
+}
+
+/* Estilos para el contenedor de configuraciones */
+.settings-container {
+    background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco con opacidad */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: relative; /* Para posicionar la corona */
+    backdrop-filter: blur(5px); /* Efecto de difuminado */
+    width: 100%; /* Ocupa todo el ancho */
+    max-width: 600px; /* Ancho máximo para el contenedor */
+}
+
+.setting-option {
+    margin-bottom: 15px;
+}
+
+.setting-option label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.setting-option input[type="text"],
+.setting-option input[type="email"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    color: #666;
+}
+
+.setting-option input[type="checkbox"] {
+    margin-left: 10px;
+}
+
+.crown-icon {
+    position: absolute;
+    top: -20px; /* Ajusta la posición según sea necesario */
+    right: 20px; /* Ajusta la posición según sea necesario */
+    font-size: 3em; /* Tamaño de la corona */
+    color: gold; /* Color dorado para la corona */
+    opacity: 0.8; /* Opacidad de la corona */
+}

@@ -1,0 +1,101 @@
+<div class="dashboard-container">
+    <div class="sidebar" [ngClass]="{'sidebar-collapsed': viewModel.isCollapsed}">
+        <button class="toggle-button" (click)="toggleSidebar()"> 
+            <i class="fas fa-bars"></i>
+        </button>
+        <nav> 
+            <a (click)="navigateTo('/home')">
+                <i class="fas fa-home"></i>
+                <span *ngIf="!viewModel.isCollapsed" class="link-text">Home</span>
+            </a>
+            <a (click)="navigateTo('/ambient')">
+                <i class="fas fa-sun"></i>
+                <span *ngIf="!viewModel.isCollapsed" class="link-text">Luz Ambiental</span>
+            </a>
+            <a (click)="navigateTo('/heart-rate')">
+                <i class="fas fa-heart"></i>
+                <span *ngIf="!viewModel.isCollapsed" class="link-text">Ritmo Cardíaco</span>
+            </a>
+            <a id="thermometer-icon" (click)="navigateTo('/temperature')">
+                <i class="fas fa-thermometer-half"></i>
+                <span *ngIf="!viewModel.isCollapsed" class="link-text">Temperatura Corporal</span>
+            </a>
+            <a (click)="navigateTo('/gyroscope')">
+                <i class="fas fa-compass"></i>
+                <span *ngIf="!viewModel.isCollapsed" class="link-text">Giroscopio</span>
+            </a>
+            <a (click)="navigateTo('/settings')">
+                <i class="fas fa-cog"></i>
+                <span *ngIf="!viewModel.isCollapsed" class="link-text">Configuración</span>
+            </a>
+        </nav>
+    </div>
+
+    <div class="content">
+        <div class="dashboard">
+            <div class="card gyroscope-card">
+                <div class="card-content">
+                    <div class="card-text">
+                        <div class="inclination-value">
+                            {{ viewModel.inclination ? viewModel.inclination + '°' : 'Sin datos' }}
+                        </div>
+                        <div class="description">Inclinación Corporal</div>
+                    </div>
+                    <i class="fas fa-compass"></i>
+                </div>
+            </div>
+
+            <!-- Nueva sección para información sobre la postura -->
+            <div class="card">
+                <div class="posture-icon">
+                    <i [ngClass]="{
+                        'fas fa-thumbs-up': viewModel.inclination !== null && viewModel.inclination <= 10,
+                        'fas fa-thumbs-down': viewModel.inclination !== null && viewModel.inclination > 10,
+                        'fas fa-question-circle': viewModel.inclination === null
+                    }"></i>
+                </div>
+                <p class="posture-text" *ngIf="viewModel.inclination === null">Sin datos de inclinación.</p>
+                <p class="posture-text" *ngIf="viewModel.inclination !== null && viewModel.inclination <= 10">¡Buena postura! Mantén esta inclinación.</p>
+                <p class="posture-text" *ngIf="viewModel.inclination !== null && viewModel.inclination > 10">¡Postura no ideal! Considera ajustar tu posición.</p>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <h3>Últimos 10 registros del giroscopio</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Giro X</th>
+                        <th>Giro Y</th>
+                        <th>Giro Z</th>
+                        <th>Inclinación</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of viewModel.sensorDataHistory; trackBy: trackBySensorData">
+                        <td>{{ data.id }}</td>
+                        <td>{{ data.giroX }}°</td>
+                        <td>{{ data.giroY }}°</td>
+                        <td>{{ data.giroZ }}°</td>
+                        <td>{{ viewModel.calculateInclination(data) }}°</td>
+                    </tr>
+                    <tr *ngIf="!viewModel.sensorDataHistory || viewModel.sensorDataHistory.length === 0">
+                        <td colspan="5" class="no-data">No hay datos disponibles</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="posture-effects">
+                <h3>Efectos de la Postura</h3>
+                <p>Una buena postura es esencial para la salud a largo plazo. Mantener una inclinación adecuada puede prevenir:</p>
+                <ul>
+                    <li>Dolor de espalda y cuello</li>
+                    <li>Fatiga muscular</li>
+                    <li>Problemas de circulación</li>
+                    <li>Estrés en las articulaciones</li>
+                </ul>
+                <p>Se recomienda realizar ejercicios de estiramiento y fortalecer los músculos de la espalda para mejorar la postura.</p>
+            </div>
+        </div>
+    </div>
+</div>

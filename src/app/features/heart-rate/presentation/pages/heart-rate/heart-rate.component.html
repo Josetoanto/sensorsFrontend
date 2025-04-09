@@ -1,0 +1,126 @@
+<div class="dashboard-container">
+    <div class="sidebar" [ngClass]="{'sidebar-collapsed': isCollapsed}">
+        <button class="toggle-button" (click)="toggleSidebar()"> 
+            <i class="fas fa-bars"></i>
+        </button>
+        <nav> 
+            <a (click)="navigateToHome()">
+                <i class="fas fa-home"></i>
+                <span class="link-text" *ngIf="!isCollapsed">Home</span>
+            </a>
+            <a (click)="navigateToAmbient()">
+                <i class="fas fa-sun"></i>
+                <span class="link-text" *ngIf="!isCollapsed">Luz Ambiental</span>
+            </a>
+            <a (click)="navigateToHeartRate()">
+                <i class="fas fa-heart"></i>
+                <span class="link-text" *ngIf="!isCollapsed">Ritmo Cardíaco</span>
+            </a>
+            <a id="thermometer-icon" (click)="navigateToTemperature()">
+                <i class="fas fa-thermometer-half"></i>
+                <span class="link-text" *ngIf="!isCollapsed">Temperatura Corporal</span>
+            </a>
+            <a (click)="navigateToGyroscope()">
+                <i class="fas fa-compass"></i>
+                <span class="link-text" *ngIf="!isCollapsed">Giroscopio</span>
+            </a>
+            <a (click)="navigateToSettings()">
+                <i class="fas fa-cog"></i>
+                <span class="link-text" *ngIf="!isCollapsed">Configuración</span>
+            </a>
+        </nav>
+    </div>
+
+    <div class="content">
+        <div class="dashboard">
+            <div class="card heart-card">
+                <div class="card-content">
+                    <div class="card-text">
+                        <div class="heart-rate">{{ heartRate !== null ? (heartRate | number:'1.0-2') + ' bpm' : 'Sin datos' }}</div>
+                        <div class="description">Ritmo Cardíaco Actual</div>
+                    </div>
+                    <i class="fas fa-heart"></i>
+                </div>
+            </div>
+
+            <div class="card average-card">
+                <div class="card-content">
+                    <div class="card-text">
+                        <div class="heart-rate">{{ averageHeartRate !== null ? (averageHeartRate | number:'1.0-2') + ' bpm' : 'Sin datos' }}</div>
+                        <div class="description">Promedio Histórico</div>
+                    </div>
+                    <i class="fas fa-chart-bar"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="data-container">
+            <div class="table-container">
+                <h3>Últimos 10 valores recibidos</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Ritmo Cardíaco (bpm)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let reading of heartReadings">
+                            <td>{{ reading.id }}</td>
+                            <td>{{ reading.bpm | number:'1.0-2' }}</td>
+                        </tr>
+                        <tr *ngIf="!heartReadings || heartReadings.length === 0">
+                            <td colspan="2" class="no-data">No hay datos disponibles</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="chart-container">
+                <h3>Gráfica de Valores por ID</h3>
+                <ngx-charts-line-chart
+                    [view]="view"
+                    [scheme]="scheme"
+                    [results]="chartData"
+                    [gradient]="gradient"
+                    [xAxis]="showXAxis"
+                    [yAxis]="showYAxis"
+                    [legend]="showLegend"
+                    [showXAxisLabel]="showXAxisLabel"
+                    [showYAxisLabel]="showYAxisLabel"
+                    [xAxisLabel]="xAxisLabel"
+                    [yAxisLabel]="yAxisLabel"
+                    [autoScale]="true"
+                    [timeline]="false"
+                    [strokeWidth]="2"
+                    [strokeLinecap]="'round'"
+                    [strokeLinejoin]="'round'">
+                </ngx-charts-line-chart>
+                <div *ngIf="!chartData || chartData.length === 0" class="no-data-message">
+                    No hay datos suficientes para mostrar la gráfica
+                </div>
+
+                <div class="lighting-info">
+                    <h3>Niveles de Ritmo Cardíaco</h3>
+                    <div class="info-grid">
+                        <div class="info-card low-light">
+                            <h4>Bajo</h4>
+                            <p>40 - 60 bpm</p>
+                            <p>Bradicardia</p>
+                        </div>
+                        <div class="info-card optimal-light">
+                            <h4>Normal</h4>
+                            <p>60 - 100 bpm</p>
+                            <p>Rango saludable</p>
+                        </div>
+                        <div class="info-card high-light">
+                            <h4>Alto</h4>
+                            <p>100+ bpm</p>
+                            <p>Taquicardia</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

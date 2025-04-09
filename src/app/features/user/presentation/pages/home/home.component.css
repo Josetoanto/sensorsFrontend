@@ -1,0 +1,264 @@
+.dashboard-container {
+    display: flex;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f4f4f4;
+}
+
+.sidebar {
+    width: 230px;
+    background: linear-gradient(45deg, #0081a7, #00b4d8); /* Degradado */
+    color: white;
+    padding: 20px;
+    height: auto;
+    transition: width 0.3s;
+    overflow: hidden; /* Para manejar contenido fuera de los límites al colapsar */
+}
+.sidebar-collapsed {
+    width: 50px;
+}
+.toggle-button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.3em;
+    cursor: pointer;
+    margin-bottom: 20px;
+    margin-left: 15px;
+    padding: 15px;
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 5px;
+    margin: 5px 0;
+}
+.toggle-button:hover {
+    background-color: #f4f4f4;
+    color: #0081a7;
+}
+
+nav a {
+    display: flex;
+    align-items: center;
+    color: white;
+    text-decoration: none;
+    padding: 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+    white-space: nowrap; /* Evitar que los textos se rompan */
+    overflow: hidden; /* Esconde cualquier contenido que exceda el ancho */
+}
+
+
+
+#thermometer-icon i {
+    margin-left: 2.5px; /* Espacio entre el icono y el texto */
+}
+
+
+nav a .link-text {
+    margin-left: 10px;
+    opacity: 1; /* Visibilidad total por defecto */
+    transition: opacity 0.3s, margin 0.3s;
+}
+nav a:hover {
+    background-color: #f4f4f4;
+    color: black;
+}
+.content {
+    flex: 1;
+    padding: 30px;
+    background-color: #f8f9fa;
+    min-height: 100vh;
+}
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(375px, 500px));
+    grid-template-rows: repeat(2, auto);
+    gap: 40px;
+    justify-content: center;
+    align-items: start;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.card {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, #0081a7, #00b4d8);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.card:hover::before {
+    opacity: 1;
+}
+
+.card-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    width: 100%;
+    z-index: 1;
+}
+
+.card-text {
+    flex: 1;
+    text-align: left;
+}
+
+.card .light,
+.card .heart-rate,
+.card .temperature,
+.card .gyroscope {
+    font-size: 2.5em;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.card .description {
+    font-size: 1.3em;
+    color: #7f8c8d;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.card .unit {
+    font-size: 0.6em;
+    color: #7f8c8d;
+    font-weight: 400;
+}
+
+.card i {
+    font-size: 3.1em;
+    color: #0081a7;
+    transition: all 0.3s ease;
+    opacity: 0.8;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.card:hover ion-icon {
+    transform: scale(1.1);
+    opacity: 1;
+}
+
+.status {
+    font-size: 1em;
+    margin-top: 6px;
+    padding: 4px 8px;
+    border-radius: 10px;
+    display: inline-block;
+    font-weight: 500;
+}
+
+.status.normal {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+.status.high {
+    background-color: #ffebee;
+    color: #c62828;
+}
+
+.status.low {
+    background-color: #e3f2fd;
+    color: #1565c0;
+}
+
+@media (max-width: 768px) {
+    .dashboard-container {
+        display: flex;
+        flex-direction: column;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        background-color: #f4f4f4;
+        transition: all 0.3s ease-in-out; /* Transiciones suaves */
+    }
+
+    nav:not(.sidebar-collapsed) {
+        width: 450px;
+    }
+
+    .sidebar {
+        width: 230px;
+        color: white;
+        padding: 20px;
+        height: 100vh;
+        transition: all 0.3s ease-in-out;
+        overflow: hidden;
+    }
+    
+    /* Cuando el sidebar no está colapsado */
+    .sidebar:not(.sidebar-collapsed) {
+        width: 100vw; /* Ocupa toda la pantalla */
+        position: absolute; /* Para que se superponga */
+        z-index: 10; /* Aparece por encima de otros elementos */
+    }
+
+    .sidebar:is(.sidebar-collapsed) {
+        width: 9vw; /* Ocupa toda la pantalla */
+        z-index: 10; /* Aparece por encima de otros elementos */
+        overflow: hidden;
+        position: absolute;
+    }
+
+    .dashboard {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        gap: 25px;
+        padding: 15px;
+    }
+
+    .card {
+        min-height: 180px;
+        padding: 25px;
+    }
+
+    .card .light,
+    .card .heart-rate,
+    .card .temperature,
+    .card .gyroscope {
+        font-size: 2.2em;
+    }
+
+    .card .description {
+        font-size: 1.2em;
+    }
+
+    .card i {
+        font-size: 2.8em;
+    }
+
+    .table-container {
+        margin-left: 70px;
+        max-width: max-content;
+    }
+    
+    .status {
+        font-size: 0.9em;
+    }
+}

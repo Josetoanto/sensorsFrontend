@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@300;400;500&display=swap');
+
+
+.form-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #1576d9 0%, #0077ff 50%, #00d4ff 100%);
+    padding: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+    backdrop-filter: blur(10px);
+}
+
+h2 {
+    font-size: 4rem;
+    color: white;
+    text-align: center;
+    font-family: 'poppins', sans-serif;
+}
+
+legend{
+    color: white;
+    font-weight: lighter;
+    font-family: sans-serif;
+}
+
+fieldset {
+    border: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+label {
+    color: white;
+    font-size: 1rem;
+    font-weight: 800;
+    font-weight: lighter;
+    font-family: sans-serif;
+    margin-top: 5px;
+}
+
+input {
+    text-indent: 5%;
+    border: none;
+    border-radius: 8px;
+    height: 35px;
+    padding: 8px;
+    font-size: 1rem;
+    outline: none;
+    width: 95.6%;
+    box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+button {
+    background: white;
+    color: #0077ff;
+    border: 2px solid white;
+    padding: 12px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border-radius: 8px;
+    margin-top: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+    background: #0077ff;
+    color: white;
+    border: 2px solid white;
+    transform: scale(1.05);
+}
+
+a {
+    cursor: pointer;
+    font-family: sans-serif;
+    color: white;
+    text-align: center;
+    font-size: 1rem;
+    text-decoration: none;
+    margin-top: 10px;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+legend {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.back-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+.back-button button {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+    padding: 8px 15px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.back-button button:hover {
+    background: white;
+    color: #0077ff;
+}
+
+.error-message {
+    color: #cdcbcb;
+    font-size: 0.8rem;
+    font-family: sans-serif;
+}
+
+@media (max-width: 768px) {
+    .back-button {
+      display: none;
+    }
+  }
+  
